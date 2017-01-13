@@ -7,6 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3612CCC81E28B1D600BF8348 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCB51E28B1D600BF8348 /* Accelerate.framework */; };
+		3612CCC91E28B1D600BF8348 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCB61E28B1D600BF8348 /* AssetsLibrary.framework */; };
+		3612CCCA1E28B1D600BF8348 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCB71E28B1D600BF8348 /* AVFoundation.framework */; };
+		3612CCCB1E28B1D600BF8348 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCB81E28B1D600BF8348 /* CFNetwork.framework */; };
+		3612CCCC1E28B1D600BF8348 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCB91E28B1D600BF8348 /* CoreGraphics.framework */; };
+		3612CCCD1E28B1D600BF8348 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBA1E28B1D600BF8348 /* CoreLocation.framework */; };
+		3612CCCE1E28B1D600BF8348 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBB1E28B1D600BF8348 /* CoreMedia.framework */; };
+		3612CCCF1E28B1D600BF8348 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBC1E28B1D600BF8348 /* CoreMotion.framework */; };
+		3612CCD01E28B1D600BF8348 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBD1E28B1D600BF8348 /* CoreVideo.framework */; };
+		3612CCD11E28B1D600BF8348 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBE1E28B1D600BF8348 /* Foundation.framework */; };
+		3612CCD21E28B1D600BF8348 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCBF1E28B1D600BF8348 /* JavaScriptCore.framework */; };
+		3612CCD31E28B1D600BF8348 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC01E28B1D600BF8348 /* libc++.tbd */; };
+		3612CCD41E28B1D600BF8348 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC11E28B1D600BF8348 /* libz.tbd */; };
+		3612CCD51E28B1D600BF8348 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC21E28B1D600BF8348 /* MediaPlayer.framework */; };
+		3612CCD61E28B1D600BF8348 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC31E28B1D600BF8348 /* OpenGLES.framework */; };
+		3612CCD71E28B1D600BF8348 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC41E28B1D600BF8348 /* QuartzCore.framework */; };
+		3612CCD81E28B1D600BF8348 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC51E28B1D600BF8348 /* Security.framework */; };
+		3612CCD91E28B1D600BF8348 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */; };
+		3612CCDA1E28B1D600BF8348 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC71E28B1D600BF8348 /* UIKit.framework */; };
+		3612CCDC1E28B1E800BF8348 /* WikitudeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */; };
+		3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */ = {isa = PBXBuildFile; fileRef = 3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */; };
 		36D0C68E1E289A94004834EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C68D1E289A94004834EB /* main.m */; };
 		36D0C6911E289A94004834EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6901E289A94004834EB /* AppDelegate.m */; };
 		36D0C6941E289A94004834EB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6931E289A94004834EB /* ViewController.m */; };
@@ -16,6 +37,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3612CCB51E28B1D600BF8348 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		3612CCB61E28B1D600BF8348 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3612CCB71E28B1D600BF8348 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3612CCB81E28B1D600BF8348 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		3612CCB91E28B1D600BF8348 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3612CCBA1E28B1D600BF8348 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3612CCBB1E28B1D600BF8348 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		3612CCBC1E28B1D600BF8348 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		3612CCBD1E28B1D600BF8348 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		3612CCBE1E28B1D600BF8348 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3612CCBF1E28B1D600BF8348 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		3612CCC01E28B1D600BF8348 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3612CCC11E28B1D600BF8348 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		3612CCC21E28B1D600BF8348 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3612CCC31E28B1D600BF8348 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3612CCC41E28B1D600BF8348 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3612CCC51E28B1D600BF8348 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		3612CCC71E28B1D600BF8348 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WikitudeSDK.framework; path = Lego/Framework/WikitudeSDK.framework; sourceTree = "<group>"; };
+		3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ArchitectWorld; path = Lego/ArchitectWorld; sourceTree = "<group>"; };
 		36D0C6891E289A94004834EB /* Lego.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lego.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0C68D1E289A94004834EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		36D0C68F1E289A94004834EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,17 +75,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3612CCDC1E28B1E800BF8348 /* WikitudeSDK.framework in Frameworks */,
+				3612CCC81E28B1D600BF8348 /* Accelerate.framework in Frameworks */,
+				3612CCC91E28B1D600BF8348 /* AssetsLibrary.framework in Frameworks */,
+				3612CCCA1E28B1D600BF8348 /* AVFoundation.framework in Frameworks */,
+				3612CCCB1E28B1D600BF8348 /* CFNetwork.framework in Frameworks */,
+				3612CCCC1E28B1D600BF8348 /* CoreGraphics.framework in Frameworks */,
+				3612CCCD1E28B1D600BF8348 /* CoreLocation.framework in Frameworks */,
+				3612CCCE1E28B1D600BF8348 /* CoreMedia.framework in Frameworks */,
+				3612CCCF1E28B1D600BF8348 /* CoreMotion.framework in Frameworks */,
+				3612CCD01E28B1D600BF8348 /* CoreVideo.framework in Frameworks */,
+				3612CCD11E28B1D600BF8348 /* Foundation.framework in Frameworks */,
+				3612CCD21E28B1D600BF8348 /* JavaScriptCore.framework in Frameworks */,
+				3612CCD31E28B1D600BF8348 /* libc++.tbd in Frameworks */,
+				3612CCD41E28B1D600BF8348 /* libz.tbd in Frameworks */,
+				3612CCD51E28B1D600BF8348 /* MediaPlayer.framework in Frameworks */,
+				3612CCD61E28B1D600BF8348 /* OpenGLES.framework in Frameworks */,
+				3612CCD71E28B1D600BF8348 /* QuartzCore.framework in Frameworks */,
+				3612CCD81E28B1D600BF8348 /* Security.framework in Frameworks */,
+				3612CCD91E28B1D600BF8348 /* SystemConfiguration.framework in Frameworks */,
+				3612CCDA1E28B1D600BF8348 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3612CCB41E28B1D500BF8348 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */,
+				3612CCB51E28B1D600BF8348 /* Accelerate.framework */,
+				3612CCB61E28B1D600BF8348 /* AssetsLibrary.framework */,
+				3612CCB71E28B1D600BF8348 /* AVFoundation.framework */,
+				3612CCB81E28B1D600BF8348 /* CFNetwork.framework */,
+				3612CCB91E28B1D600BF8348 /* CoreGraphics.framework */,
+				3612CCBA1E28B1D600BF8348 /* CoreLocation.framework */,
+				3612CCBB1E28B1D600BF8348 /* CoreMedia.framework */,
+				3612CCBC1E28B1D600BF8348 /* CoreMotion.framework */,
+				3612CCBD1E28B1D600BF8348 /* CoreVideo.framework */,
+				3612CCBE1E28B1D600BF8348 /* Foundation.framework */,
+				3612CCBF1E28B1D600BF8348 /* JavaScriptCore.framework */,
+				3612CCC01E28B1D600BF8348 /* libc++.tbd */,
+				3612CCC11E28B1D600BF8348 /* libz.tbd */,
+				3612CCC21E28B1D600BF8348 /* MediaPlayer.framework */,
+				3612CCC31E28B1D600BF8348 /* OpenGLES.framework */,
+				3612CCC41E28B1D600BF8348 /* QuartzCore.framework */,
+				3612CCC51E28B1D600BF8348 /* Security.framework */,
+				3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */,
+				3612CCC71E28B1D600BF8348 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		36D0C6801E289A93004834EB = {
 			isa = PBXGroup;
 			children = (
+				3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */,
 				36D0C68B1E289A94004834EB /* Lego */,
 				36D0C68A1E289A94004834EB /* Products */,
+				3612CCB41E28B1D500BF8348 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36D0C69C1E289A94004834EB /* LaunchScreen.storyboard in Resources */,
+				3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */,
 				36D0C6991E289A94004834EB /* Assets.xcassets in Resources */,
 				36D0C6971E289A94004834EB /* Main.storyboard in Resources */,
 			);
@@ -219,7 +311,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -261,7 +353,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -274,6 +366,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SJ49GZ2K5L;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lego/Framework",
+				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.askari01.sps.Lego;
@@ -286,6 +383,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = SJ49GZ2K5L;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lego/Framework",
+				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.askari01.sps.Lego;
@@ -312,6 +414,7 @@
 				36D0C6A21E289A94004834EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

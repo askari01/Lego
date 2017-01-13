@@ -1,6 +1,7 @@
 // implementation of AR-Experience (aka "World")
 var World = {
-	// you may request new data from server periodically, however: in this sample data is only requested once
+
+    // you may request new data from server periodically, however: in this sample data is only requested once
 	isRequestingData: false,
 
 	// true once data was fetched
@@ -21,7 +22,7 @@ var World = {
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
 		// empty list of visible markers
 		World.markerList = [];
-
+        
 		// Start loading marker assets:
 		// Create an AR.ImageResource for the marker idle-image
 		World.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png");
@@ -29,7 +30,12 @@ var World = {
 		World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
 		// Create an AR.ImageResource referencing the image that should be displayed for a direction indicator. 
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
+        
+        
+        AR.logger.debug("WOW");
 
+        
+        
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
 		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
 			var singlePoi = {
