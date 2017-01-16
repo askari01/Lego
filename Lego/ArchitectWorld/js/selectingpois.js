@@ -90,6 +90,26 @@ var World = {
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
 
+        // testing
+         AR.logger.info(marker.poiData.latitude);
+         AR.logger.info(marker.poiData.description);
+         AR.logger.debug("WOW1");
+        abc ();
+        
+        // update panel values
+        $("#poi-detail-title").html(marker.poiData.title);
+        $("#poi-detail-description").html(marker.poiData.description);
+        
+        var distanceToUserValue = abc.myJsonData[1].text;
+        
+        $("#poi-detail-distance").html(distanceToUserValue);
+        
+        // show panel
+        $("#panel-poidetail").panel("open", 123);
+
+        // end test
+        
+        
 		// deselect previous marker
 		if (World.currentMarker) {
 			if (World.currentMarker.poiData.id == marker.poiData.id) {
@@ -140,3 +160,19 @@ AR.context.onLocationChanged = World.locationChanged;
 	To detect clicks where no drawable was hit set a custom function on AR.context.onScreenClick where the currently selected marker is deselected.
 */
 AR.context.onScreenClick = World.onScreenClick;
+
+function abc () {
+    AR.logger.info ("moveOrDie");
+    var myJsonData = [{
+                      "distance": {
+                      "text": "6.5 mi",
+                      "value": 10424
+                      },
+                      "duration": {
+                      "text": "34 mins",
+                      "value": 2015
+                      },
+                      "status": "OK"
+                      }];
+    
+}
