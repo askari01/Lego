@@ -1,3 +1,11 @@
+// information about server communication. This sample webservice is provided by Wikitude and returns random dummy places near given location
+var ServerInformation = {
+POIDATA_SERVER: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592&key=AIzaSyDWKgtRrol0rsxv4dwco3GVfOWYZ9tJ6Zw",
+POIDATA_SERVER_ARG_LAT: "lat",
+POIDATA_SERVER_ARG_LON: "lon",
+POIDATA_SERVER_ARG_NR_POIS: "nrPois"
+};
+
 // implementation of AR-Experience (aka "World")
 var World = {
 
@@ -100,8 +108,8 @@ var World = {
         $("#poi-detail-title").html(marker.poiData.title);
         $("#poi-detail-description").html(marker.poiData.description);
         
-        var distanceToUserValue = abc.myJsonData[1].text;
-        
+//        var distanceToUserValue = myJsonData[0]["distance"]["text"];
+        var distanceToUserValue = 123;
         $("#poi-detail-distance").html(distanceToUserValue);
         
         // show panel
@@ -163,6 +171,7 @@ AR.context.onScreenClick = World.onScreenClick;
 
 function abc () {
     AR.logger.info ("moveOrDie");
+
     var myJsonData = [{
                       "distance": {
                       "text": "6.5 mi",
@@ -174,5 +183,24 @@ function abc () {
                       },
                       "status": "OK"
                       }];
+//    AR.logger.info (myJsonData[0]["distance"]["text"]);
     
+    
+    
+    var serverUrl = ServerInformation.POIDATA_SERVER;
+    var jqxhr = $.getJSON(serverUrl, function(data) {
+                          AR.logger.info ("moveOrDie1");
+//                          World.loadPoisFromJsonData(data);
+                          AR.logger.info(data["rows"][0]["distance"]["text"]);
+                          })
+    .error(function(err) {
+           AR.logger.info ("Die");
+           World.updateStatusMessage("Invalid web-service response.", true);
+//           World.isRequestingData = false;
+           })
+    .complete(function() {
+              AR.logger.info(data["rows"][0]["distance"]["text"]);
+              AR.logger.info ("Live2See anotherDay");
+//              World.isRequestingData = false;
+              });
 }

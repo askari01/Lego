@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-
+#import <JavaScriptCore/JavaScriptCore.h>
 #import <WikitudeSDK/WikitudeSDK.h>
 /* Wikitude SDK debugging */
 #import <WikitudeSDK/WTArchitectViewDebugDelegate.h>
@@ -76,11 +76,15 @@
         NSDictionary *views = NSDictionaryOfVariableBindings(_architectView);
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"|[_architectView]|" options:0 metrics:nil views:views] ];
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_architectView]|" options:0 metrics:nil views:views] ];
+        
+        
+        //Testing JS call
     }
     else {
         NSLog(@"This device is not supported. Show either an alert or use this class method even before presenting the view controller that manages the WTArchitectView. Error: %@", [deviceSupportError localizedDescription]);
     }
 }
+    
 
 #pragma mark - View Lifecycle
 - (void)viewWillAppear:(BOOL)animated {
@@ -219,7 +223,22 @@
         [self startWikitudeSDKRendering];
     });
 }
+    
+    - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url
+    {
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected"]) {
+            
+            NSDictionary *parameters = nil;//[self parseURLParameterFromURL:[url absoluteString]];
+            
+            NSString *myURL = [url absoluteString] ;
+            NSString *tag = [myURL substringFromIndex:[myURL  rangeOfString:@"//"].location];
+            NSLog(@"tag is %@", tag);
+            
+        }
+    }
 
 
 
 @end
+
+

@@ -8,13 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <WikitudeSDK/WTArchitectView.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <WTArchitectViewDelegate>
+@property (nonatomic,strong) JSContext *context;
+
 //
 //@property (nonatomic, strong) WTArchitectView               *architectView;
 //@property (nonatomic, weak) WTNavigation                    *architectWorldNavigation;
 
-
+- (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
 @end
 
