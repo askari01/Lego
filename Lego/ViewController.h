@@ -13,7 +13,10 @@
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>
 @property (nonatomic,strong) JSContext *context;
-    @property (weak, nonatomic) IBOutlet UILabel *label;
+    @property (weak, nonatomic) IBOutlet UILabel *mainLbl;
+    @property (weak, nonatomic) IBOutlet UILabel *cordinatesLbl;
+    @property (weak, nonatomic) IBOutlet UILabel *descriptionLbl;
+    @property (weak, nonatomic) IBOutlet UIImageView *picView;
 
 //
 //@property (nonatomic, strong) WTArchitectView               *architectView;
@@ -23,9 +26,6 @@
 + (CGSize)screenSize ;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
-
-
-@property (weak, nonatomic) IBOutlet UILabel *myTextView;
     
 @end
 

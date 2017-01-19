@@ -143,7 +143,7 @@ var World = {
 
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
-		World.currentMarker = marker;
+		
 
 		// update panel values
 		$("#poi-detail-title").html(marker.poiData.title);
@@ -155,7 +155,22 @@ var World = {
 
 		// show panel
 //		$("#panel-poidetail").panel("open", 123);
+        
+        // deselect previous marker
+        if (World.currentMarker) {
+            AR.logger.info (World.currentMarker.poiData.id + " " +marker.poiData.id );
+            if (World.currentMarker.poiData.id == marker.poiData.id) {
+                return;
+            }
+            World.currentMarker.setDeselected(World.currentMarker);
+        }
+        
+        // highlight current one
+        marker.setSelected(marker);
+        World.currentMarker = marker;
+        
         var currentMarker = World.currentMarker;
+
         
         var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
         /*
@@ -170,6 +185,7 @@ var World = {
 		$(".ui-panel-dismiss").unbind("mousedown");
 
 		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
+                                 AR.logger.info("deselect");
 			World.currentMarker.setDeselected(World.currentMarker);
 		});
 	},

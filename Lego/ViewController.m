@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"inside xxxxxx");
+//    NSLog(@"inside xxxxxx");
 //    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
     
     /* It might be the case that the device which is running the application does not fulfil all Wikitude SDK hardware requirements.
@@ -47,7 +47,7 @@
      */
     NSError *deviceSupportError = nil;
     if ( [WTArchitectView isDeviceSupportedForRequiredFeatures:WTFeature_Geo error:&deviceSupportError] ) {
-        NSLog(@"inside rrrrr");
+//        NSLog(@"inside rrrrr");
         /* Standard WTArchitectView object creation and initial configuration */
         self.architectView = [[WTArchitectView alloc] initWithFrame:CGRectZero motionManager:nil];
         self.architectView.delegate = self;
@@ -73,10 +73,9 @@
         /* Standard subview handling using Autolayout */
         [self.view addSubview:self.architectView];
         
-        _myTempView.frame = CGRectMake(0, 590, 320, 360);
+//        _myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
         
         
-        [[self myTextView] setText:@"Hello world my name is khan"];
 //        self.myTempView.hidden = true;
 
         
@@ -86,7 +85,7 @@
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"|[_architectView]|" options:0 metrics:nil views:views] ];
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_architectView]|" options:0 metrics:nil views:views] ];
         
-        NSLog(@"inside");
+//        NSLog(@"inside");
         
         //Testing JS call
     }
@@ -257,22 +256,25 @@
                     NSString *variableKey = [keyVal objectAtIndex:0];
                     NSString *value = (keyVal.count == 2) ? [keyVal lastObject] : nil;
                     NSLog(@"%@ %@", value , variableKey);
+                    if (variableKey == @"id"){
+                        NSLog(@"hello");
+                        _mainLbl.text = value;
+                    }
                 }
             }
 
             NSLog(@"tag is %@", tag);
-
-            self.myTextView.text = tag;
             
             self.myTempView .hidden = false;
 //            CGSize size = [UIScreen mainScreen].nativeBounds.size;
 //            NSLog(@"width @%", size.width);
-            NSLog(@"width %f",[[UIScreen mainScreen] bounds].size.width);
+//            NSLog(@"width %f",[[UIScreen mainScreen] bounds].size.height);
+            
             [UIView animateWithDuration:0.5
                                   delay:0.1
                                 options: UIViewAnimationCurveEaseIn
                              animations:^{
-                                 NSLog(@"opening");
+//                                 NSLog(@"opening");
                                  _myTempView.frame = CGRectMake(0, 420, [[UIScreen mainScreen] bounds].size.width, 360);
                              }
                              completion:^(BOOL finished){
@@ -284,7 +286,7 @@
 //            _label.text = @"44554";
         }
         if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
-            NSLog(@"closing");
+//            NSLog(@"closing");
             
 //            self.myTempView .hidden = false;
 //            CGSize size = [UIScreen mainScreen].bounds.size;
@@ -292,7 +294,7 @@
                                   delay:0.5
                                 options: UIViewAnimationCurveEaseIn
                              animations:^{
-                                 NSLog(@"closing");
+//                                 NSLog(@"closing");
                                  self.myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
                              }
                              completion:^(BOOL finished){
@@ -303,15 +305,6 @@
 //            self.myTempView .hidden = true;
         }
     }
-
-+ (CGSize)screenSize {
-    CGSize screenSize = [UIScreen mainScreen].bounds.size;
-    if ((NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        return CGSizeMake(screenSize.height, screenSize.width);
-    }
-    return screenSize;
-}
-
 
 @end
 
