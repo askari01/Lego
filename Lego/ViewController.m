@@ -34,7 +34,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"inside xxxxxx");
+//    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
     
     /* It might be the case that the device which is running the application does not fulfil all Wikitude SDK hardware requirements.
      To check for this and handle the situation properly, use the -isDeviceSupportedForRequiredFeatures:error class method.
@@ -46,7 +47,7 @@
      */
     NSError *deviceSupportError = nil;
     if ( [WTArchitectView isDeviceSupportedForRequiredFeatures:WTFeature_Geo error:&deviceSupportError] ) {
-        
+        NSLog(@"inside rrrrr");
         /* Standard WTArchitectView object creation and initial configuration */
         self.architectView = [[WTArchitectView alloc] initWithFrame:CGRectZero motionManager:nil];
         self.architectView.delegate = self;
@@ -71,12 +72,21 @@
         
         /* Standard subview handling using Autolayout */
         [self.view addSubview:self.architectView];
+        
+        _myTempView.frame = CGRectMake(0, 590, 320, 360);
+        
+        
+        [[self myTextView] setText:@"Hello world my name is khan"];
+//        self.myTempView.hidden = true;
+
+        
         self.architectView.translatesAutoresizingMaskIntoConstraints = NO;
         
         NSDictionary *views = NSDictionaryOfVariableBindings(_architectView);
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"|[_architectView]|" options:0 metrics:nil views:views] ];
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_architectView]|" options:0 metrics:nil views:views] ];
         
+        NSLog(@"inside");
         
         //Testing JS call
     }
@@ -226,17 +236,81 @@
     
     - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url
     {
-        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected"]) {
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?id"]) {
             
             NSDictionary *parameters = nil;//[self parseURLParameterFromURL:[url absoluteString]];
             
             NSString *myURL = [url absoluteString] ;
             NSString *tag = [myURL substringFromIndex:[myURL  rangeOfString:@"//"].location];
-            NSLog(@"tag is %@", tag);
+            NSString *encoded = tag;
+            NSString *decoded = [encoded stringByRemovingPercentEncoding];
             
+            NSLog(@"decodedString %@", decoded);
+            
+            NSString *url=myURL;
+            NSArray *comp1 = [url componentsSeparatedByString:@"?"];
+            NSString *query = [comp1 lastObject];
+            NSArray *queryElements = [query componentsSeparatedByString:@"&"];
+            for (NSString *element in queryElements) {
+                NSArray *keyVal = [element componentsSeparatedByString:@"="];
+                if (keyVal.count > 0) {
+                    NSString *variableKey = [keyVal objectAtIndex:0];
+                    NSString *value = (keyVal.count == 2) ? [keyVal lastObject] : nil;
+                    NSLog(@"%@ %@", value , variableKey);
+                }
+            }
+
+            NSLog(@"tag is %@", tag);
+
+            self.myTextView.text = tag;
+            
+            self.myTempView .hidden = false;
+//            CGSize size = [UIScreen mainScreen].nativeBounds.size;
+//            NSLog(@"width @%", size.width);
+            NSLog(@"width %f",[[UIScreen mainScreen] bounds].size.width);
+            [UIView animateWithDuration:0.5
+                                  delay:0.1
+                                options: UIViewAnimationCurveEaseIn
+                             animations:^{
+                                 NSLog(@"opening");
+                                 _myTempView.frame = CGRectMake(0, 420, [[UIScreen mainScreen] bounds].size.width, 360);
+                             }
+                             completion:^(BOOL finished){
+                             }];
+            
+            [self.view addSubview:_myTempView];
+            
+//            self.label.text = @"123456";
+//            _label.text = @"44554";
+        }
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
+            NSLog(@"closing");
+            
+//            self.myTempView .hidden = false;
+//            CGSize size = [UIScreen mainScreen].bounds.size;
+            [UIView animateWithDuration:1.5
+                                  delay:0.5
+                                options: UIViewAnimationCurveEaseIn
+                             animations:^{
+                                 NSLog(@"closing");
+                                 self.myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
+                             }
+                             completion:^(BOOL finished){
+                                 if (finished)
+                                     self.myTempView .hidden = true;
+//                                     [self.myTempView removeFromSuperview];
+                             }];
+//            self.myTempView .hidden = true;
         }
     }
 
++ (CGSize)screenSize {
+    CGSize screenSize = [UIScreen mainScreen].bounds.size;
+    if ((NSFoundationVersionNumber <= NSFoundationVersionNumber_iOS_7_1) && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return CGSizeMake(screenSize.height, screenSize.width);
+    }
+    return screenSize;
+}
 
 
 @end

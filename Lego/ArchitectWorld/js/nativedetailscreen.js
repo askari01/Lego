@@ -154,8 +154,19 @@ var World = {
 		$("#poi-detail-distance").html(distanceToUserValue);
 
 		// show panel
-		$("#panel-poidetail").panel("open", 123);
-
+//		$("#panel-poidetail").panel("open", 123);
+        var currentMarker = World.currentMarker;
+        
+        var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
+        /*
+         The urlListener of the native project intercepts this call and parses the arguments.
+         This is the only way to pass information from JavaSCript to your native code.
+         Ensure to properly encode and decode arguments.
+         Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
+         ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
+         */
+        document.location = architectSdkUrl;
+        
 		$(".ui-panel-dismiss").unbind("mousedown");
 
 		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
@@ -166,6 +177,16 @@ var World = {
 	// screen was clicked but no geo-object was hit
 	onScreenClick: function onScreenClickFn() {
 		// you may handle clicks on empty AR space too
+        var currentMarker = World.currentMarker;
+        var architectSdkUrl = "architectsdk://markerselected?Close";
+        /*
+         The urlListener of the native project intercepts this call and parses the arguments.
+         This is the only way to pass information from JavaSCript to your native code.
+         Ensure to properly encode and decode arguments.
+         Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
+         ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
+         */
+        document.location = architectSdkUrl;
 	},
 
 	// returns distance in meters of placemark with maxdistance * 1.1

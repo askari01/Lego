@@ -13,11 +13,19 @@
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>
 @property (nonatomic,strong) JSContext *context;
+    @property (weak, nonatomic) IBOutlet UILabel *label;
 
 //
 //@property (nonatomic, strong) WTArchitectView               *architectView;
 //@property (nonatomic, weak) WTNavigation                    *architectWorldNavigation;
 
 - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
++ (CGSize)screenSize ;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *myTextView;
+    
 @end
 

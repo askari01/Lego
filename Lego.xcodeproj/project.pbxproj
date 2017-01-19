@@ -27,8 +27,8 @@
 		3612CCD91E28B1D600BF8348 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */; };
 		3612CCDA1E28B1D600BF8348 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC71E28B1D600BF8348 /* UIKit.framework */; };
 		3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */ = {isa = PBXBuildFile; fileRef = 3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */; };
-		3646886F1E2DF24300472337 /* WikitudeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */; };
 		364688711E2E27B800472337 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 364688701E2E27B800472337 /* Web */; };
+		3685868F1E2F8E9D005C0EEA /* WikitudeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */; };
 		36D0C68E1E289A94004834EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C68D1E289A94004834EB /* main.m */; };
 		36D0C6911E289A94004834EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6901E289A94004834EB /* AppDelegate.m */; };
 		36D0C6941E289A94004834EB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6931E289A94004834EB /* ViewController.m */; };
@@ -60,6 +60,7 @@
 		3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WikitudeSDK.framework; path = Lego/Framework/WikitudeSDK.framework; sourceTree = "<group>"; };
 		3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ArchitectWorld; path = Lego/ArchitectWorld; sourceTree = "<group>"; };
 		364688701E2E27B800472337 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Web; path = Lego/ArchitectWorld/Web; sourceTree = "<group>"; };
+		3685868D1E2F8E88005C0EEA /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Framework; path = Lego/Framework; sourceTree = "<group>"; };
 		36D0C6891E289A94004834EB /* Lego.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lego.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0C68D1E289A94004834EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		36D0C68F1E289A94004834EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -77,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3646886F1E2DF24300472337 /* WikitudeSDK.framework in Frameworks */,
+				3685868F1E2F8E9D005C0EEA /* WikitudeSDK.framework in Frameworks */,
 				3612CCC81E28B1D600BF8348 /* Accelerate.framework in Frameworks */,
 				3612CCC91E28B1D600BF8348 /* AssetsLibrary.framework in Frameworks */,
 				3612CCCA1E28B1D600BF8348 /* AVFoundation.framework in Frameworks */,
@@ -106,6 +107,7 @@
 		3612CCB41E28B1D500BF8348 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3685868D1E2F8E88005C0EEA /* Framework */,
 				3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */,
 				3612CCB51E28B1D600BF8348 /* Accelerate.framework */,
 				3612CCB61E28B1D600BF8348 /* AssetsLibrary.framework */,
