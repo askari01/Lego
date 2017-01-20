@@ -39,7 +39,7 @@ function Marker(poiData) {
         zOrder: 1,
         offsetY: 0.55,
         style: {
-            textColor: '#FFFFFF',
+            textColor: '#000000',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
         }
     });
@@ -49,7 +49,7 @@ function Marker(poiData) {
         zOrder: 1,
         offsetY: -0.55,
         style: {
-            textColor: '#FFFFFF'
+            textColor: '#000000'
         }
     });
 
@@ -95,7 +95,7 @@ function Marker(poiData) {
     */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel, this.descriptionLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel],
             indicator: this.directionIndicatorDrawable,
             radar: this.radardrawables
         }

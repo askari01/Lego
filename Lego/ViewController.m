@@ -74,10 +74,13 @@
         [self.view addSubview:self.architectView];
         
 //        _myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
-        
-        
-//        self.myTempView.hidden = true;
-
+ 
+        self.myTempView.hidden = true;
+        _picView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picImage:)];
+        tapGesture.numberOfTapsRequired = 1;
+        [tapGesture setDelegate:self];
+        [_picView addGestureRecognizer:tapGesture];
         
         self.architectView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -235,6 +238,29 @@
     
     - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url
     {
+        NSLog(@"CALLING");
+        
+        if (!self.myTempView.hidden){
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
+                        NSLog(@"closing");
+            
+            //            self.myTempView .hidden = false;
+            //            CGSize size = [UIScreen mainScreen].bounds.size;
+            [UIView animateWithDuration:0.5
+                                  delay:0.1
+                                options: UIViewAnimationCurveEaseIn
+                             animations:^{
+                                 //                                 NSLog(@"closing");
+                                 self.myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
+                             }
+                             completion:^(BOOL finished){
+                                 if (finished)
+                                     self.myTempView .hidden = true;
+                                 //                                     [self.myTempView removeFromSuperview];
+                             }];
+            //            self.myTempView .hidden = true;
+        }
+        }
         if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?id"]) {
             
             NSDictionary *parameters = nil;//[self parseURLParameterFromURL:[url absoluteString]];
@@ -246,30 +272,30 @@
             
             NSLog(@"decodedString %@", decoded);
             
-            NSString *url=myURL;
+            NSString *url=decoded;
             NSArray *comp1 = [url componentsSeparatedByString:@"?"];
             NSString *query = [comp1 lastObject];
             NSArray *queryElements = [query componentsSeparatedByString:@"&"];
             for (NSString *element in queryElements) {
                 NSArray *keyVal = [element componentsSeparatedByString:@"="];
                 if (keyVal.count > 0) {
+                    NSLog(@"@%", keyVal);
                     NSString *variableKey = [keyVal objectAtIndex:0];
                     NSString *value = (keyVal.count == 2) ? [keyVal lastObject] : nil;
-                    NSLog(@"%@ %@", value , variableKey);
-                    if (variableKey == @"id"){
+                    NSLog(@"%@ %@", variableKey , value);
+                    if ([variableKey  isEqual: @"title"]){
+                        NSString *title = [value stringByReplacingOccurrencesOfString:@"#" withString:@" "];
                         NSLog(@"hello");
-                        _mainLbl.text = value;
+                        _mainLbl.text = title;
                     }
                 }
             }
 
             NSLog(@"tag is %@", tag);
             
+            if (self.myTempView.hidden){
+                
             self.myTempView .hidden = false;
-//            CGSize size = [UIScreen mainScreen].nativeBounds.size;
-//            NSLog(@"width @%", size.width);
-//            NSLog(@"width %f",[[UIScreen mainScreen] bounds].size.height);
-            
             [UIView animateWithDuration:0.5
                                   delay:0.1
                                 options: UIViewAnimationCurveEaseIn
@@ -281,30 +307,15 @@
                              }];
             
             [self.view addSubview:_myTempView];
-            
+            }
 //            self.label.text = @"123456";
 //            _label.text = @"44554";
         }
-        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
-//            NSLog(@"closing");
-            
-//            self.myTempView .hidden = false;
-//            CGSize size = [UIScreen mainScreen].bounds.size;
-            [UIView animateWithDuration:1.5
-                                  delay:0.5
-                                options: UIViewAnimationCurveEaseIn
-                             animations:^{
-//                                 NSLog(@"closing");
-                                 self.myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
-                             }
-                             completion:^(BOOL finished){
-                                 if (finished)
-                                     self.myTempView .hidden = true;
-//                                     [self.myTempView removeFromSuperview];
-                             }];
-//            self.myTempView .hidden = true;
-        }
     }
+
+- (void) picImage: (id)sender {
+    NSLog(@"hello");
+}
 
 @end
 

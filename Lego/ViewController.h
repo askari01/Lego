@@ -23,7 +23,8 @@
 //@property (nonatomic, weak) WTNavigation                    *architectWorldNavigation;
 
 - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
-+ (CGSize)screenSize ;
+
+- (void) picImage: (id)sender ;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
     
