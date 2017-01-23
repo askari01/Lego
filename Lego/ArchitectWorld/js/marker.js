@@ -53,6 +53,15 @@ function Marker(poiData) {
         }
     });
 
+    // create an AR.Label for distance in marker
+    this.distance = new AR.Label(poiData.distance, 0.0, {
+                                 zOrder: 1,
+                                 offsetY: 0.55,
+                                 style: {
+                                    textColor: "#000000"
+                                 }
+    });
+    
     /*
         Create an AR.ImageDrawable using the AR.ImageResource for the direction indicator which was created in the World. Set options regarding the offset and anchor of the image so that it will be displayed correctly on the edge of the screen.
     */
@@ -95,7 +104,7 @@ function Marker(poiData) {
     */
     this.markerObject = new AR.GeoObject(markerLocation, {
         drawables: {
-            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel],
+            cam: [this.markerDrawable_idle, this.markerDrawable_selected, this.titleLabel, this.descriptionLabel],
             indicator: this.directionIndicatorDrawable,
             radar: this.radardrawables
         }

@@ -41,7 +41,7 @@ var World = {
 		// show radar & set click-listener
 		PoiRadar.show();
 		$('#radarContainer').unbind('click');
-		$("#radarContainer").click(PoiRadar.clickedRadar);
+//		$("#radarContainer").click(PoiRadar.clickedRadar);
 
 		// empty list of visible markers
 		World.markerList = [];
@@ -158,31 +158,18 @@ var World = {
         
         // deselect previous marker
         if (World.currentMarker) {
-            AR.logger.info (World.currentMarker.poiData.id + " " +marker.poiData.id );
+            AR.logger.debug (World.currentMarker.poiData.id + " " +marker.poiData.id + " :"+World.currentMarker.deselect);
             if (World.currentMarker.poiData.id == marker.poiData.id) {
                 var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(World.currentMarker.poiData.id) + "&title=" + encodeURIComponent(World.currentMarker.poiData.title) + "&description=" + encodeURIComponent(World.currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
-                /*
-                 The urlListener of the native project intercepts this call and parses the arguments.
-                 This is the only way to pass information from JavaSCript to your native code.
-                 Ensure to properly encode and decode arguments.
-                 Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
-                 ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
-                 */
                 document.location = architectSdkUrl;
                 
                 $(".ui-panel-dismiss").unbind("mousedown");
                 return;
             }
-            World.currentMarker.setDeselected(World.currentMarker);
             var architectSdkUrl = "architectsdk://markerselected?Close";
-            /*
-             The urlListener of the native project intercepts this call and parses the arguments.
-             This is the only way to pass information from JavaSCript to your native code.
-             Ensure to properly encode and decode arguments.
-             Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
-             ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
-             */
             document.location = architectSdkUrl;
+            AR.logger.info("deselect1");
+            World.currentMarker.setDeselected(World.currentMarker);
         }
         
         // highlight current one
@@ -193,19 +180,14 @@ var World = {
 
         
         var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
-        /*
-         The urlListener of the native project intercepts this call and parses the arguments.
-         This is the only way to pass information from JavaSCript to your native code.
-         Ensure to properly encode and decode arguments.
-         Note: you must use 'document.location = "architectsdk://...' to pass information from JavaScript to native.
-         ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
-         */
         document.location = architectSdkUrl;
         
 		$(".ui-panel-dismiss").unbind("mousedown");
 
 		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
             AR.logger.info("deselect");
+                                 var architectSdkUrl = "architectsdk://markerselected?Close";
+                                 document.location = architectSdkUrl;
 			World.currentMarker.setDeselected(World.currentMarker);
 		});
 	},
@@ -223,6 +205,7 @@ var World = {
          ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
          */
         document.location = architectSdkUrl;
+        AR.logger.info("deselect2");
         World.currentMarker.setDeselected(World.currentMarker);
 	},
 
