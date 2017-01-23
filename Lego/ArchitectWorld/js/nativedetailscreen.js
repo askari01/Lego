@@ -39,8 +39,8 @@ var World = {
 		AR.context.destroyAll();
 
 		// show radar & set click-listener
-		PoiRadar.show();
-		$('#radarContainer').unbind('click');
+//		PoiRadar.show();
+//		$('#radarContainer').unbind('click');
 //		$("#radarContainer").click(PoiRadar.clickedRadar);
 
 		// empty list of visible markers
