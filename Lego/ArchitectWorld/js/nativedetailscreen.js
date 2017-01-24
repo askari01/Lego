@@ -6,6 +6,7 @@ var ServerInformation = {
 	POIDATA_SERVER_ARG_NR_POIS: "nrPois"
 };
 
+
 // implementation of AR-Experience (aka "World")
 var World = {
 
@@ -32,6 +33,28 @@ var World = {
 	locationUpdateCounter: 0,
 	updatePlacemarkDistancesEveryXLocationUpdates: 10,
     
+    // call solo poi data
+    createPoiFromJsonData: function createPoiFromJsonDataFn(poiData){
+        AR.context.destroyAll();
+
+        alert("Hello beautiful"+ World.markerList);
+//        AR.logger.debug("Hello beautiful");
+//        AR.logger.debug("Hello beautiful");
+        // start loading marker assets
+        World.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png");
+        World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
+        World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
+        
+        World.markerList.push(new Marker(poiData));
+        alert("Hello again"+ World.markerList);
+        // updates distance information of all placemarks
+        World.updateDistanceToUserValues();
+        
+        World.updateStatusMessage(currentPlaceNr + ' places loaded');
+
+        
+    },
+    
 	// called to inject new POI data
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
 
@@ -42,7 +65,7 @@ var World = {
 		PoiRadar.show();
 		$('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
-
+        AR.logger.debug("starting JS architect world");
 		// empty list of visible markers
 		World.markerList = [];
 
@@ -52,30 +75,30 @@ var World = {
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
-//		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
-//			var singlePoi = {
-//				"id": poiData[currentPlaceNr].id,
-//				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
-//				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
-//				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
-//				"title": poiData[currentPlaceNr].name,
-//				"description": poiData[currentPlaceNr].description
-//			};
-//
-//			World.markerList.push(new Marker(singlePoi));
-//		}
+		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+			var singlePoi = {
+				"id": poiData[currentPlaceNr].id,
+				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
+				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
+				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
+				"title": poiData[currentPlaceNr].name,
+				"description": poiData[currentPlaceNr].description
+			};
+
+			World.markerList.push(new Marker(singlePoi));
+		}
         
 //        // add a last POI Custom
-        var singlePoi = {
-            "id": 1,
-            "latitude": parseFloat(World.userLocation.latitude),
-            "longitude": parseFloat(World.userLocation.longitude),
-            "altitude": parseFloat(World.userLocation.altitude),
-            "title": "Baby I like it",
-            "description": "Happy Phyril"
-        }
+//        var singlePoi = {
+//            "id": 1,
+//            "latitude": parseFloat(World.userLocation.latitude),
+//            "longitude": parseFloat(World.userLocation.longitude),
+//            "altitude": parseFloat(World.userLocation.altitude),
+//            "title": "Baby I like it",
+//            "description": "Happy Phyril"
+//        }
 //        // populate the last single custom Poi OnScreen
-        World.markerList.push(new Marker(singlePoi));
+//        World.markerList.push(new Marker(singlePoi));
 
 		// updates distance information of all placemarks
 		World.updateDistanceToUserValues();
@@ -86,13 +109,6 @@ var World = {
 		$("#panel-distance-range").val(100);
 		$("#panel-distance-range").slider("refresh");
 	},
-    
-    // Custom Func
-    CustomFunc: function CustomFunc() {
-        AR.logger.debug("ji");
-        alert ("ji");
-    
-    },
 
 	// sets/updates distances of all makers so they are available way faster than calling (time-consuming) distanceToUser() method all the time
 	updateDistanceToUserValues: function updateDistanceToUserValuesFn() {
@@ -101,7 +117,7 @@ var World = {
 		}
 	},
 
-	// updates status message shon in small "i"-button aligned bottom center
+	// updates status message shown in small "i"-button aligned bottom center
 	updateStatusMessage: function updateStatusMessageFn(message, isWarning) {
 
 		var themeToUse = isWarning ? "e" : "c";
@@ -343,8 +359,8 @@ var World = {
 
 		// server-url to JSON content provider
 		var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
-
-		var jqxhr = $.getJSON(serverUrl, function(data) {
+        var jqxhr = $.getJSON(serverUrl, function(data) {
+                AR.logger.info("data"+data[0].id);
 				World.loadPoisFromJsonData(data);
 			})
 			.error(function(err) {
@@ -379,3 +395,25 @@ AR.context.onLocationChanged = World.locationChanged;
 
 /* forward clicks in empty area to World */
 AR.context.onScreenClick = World.onScreenClick;
+
+function customFunc () {
+    AR.context.destroyAll();
+    alert("Hello sexy");
+    // add a last POI Custom
+    var singlPoi = {
+        "id": 21,
+        "latitude": parseFloat(World.userLocation.latitude),
+        "longitude": parseFloat(World.userLocation.longitude),
+        "altitude": parseFloat(World.userLocation.altitude),
+        "title": "ChainSMoker",
+        "description": "Are we fading lovers"
+    }
+//    abc ();
+    // populate the last single custom Poi OnScreen
+    World.createPoiFromJsonData(singlPoi);
+    
+}
+
+function abc(){
+    alert("hello abc");
+}

@@ -58,6 +58,9 @@
         /* Use the -setLicenseKey method to unlock all Wikitude SDK features that you bought with your license. */
         [self.architectView setLicenseKey:@"qByvLCLFn+zWbd/q+hLw6bB1O8ZAFxL8/x5gm/SyBy12uXgjB/d1AMXqsJKu5bS3zprcAa9r8+01xjF5IDD66fmBkjzB2eeA/F1gCbXSu8JOgsWHHNIM/nghjIUF2Vi6YTyBmg14nLwW4oEP4+/SQ1i40DoSQIYHzIzgh5vP9IJTYWx0ZWRfX4LR4ZVqtTgyXTbFGRLrE0uNwZ0JaWwD5XJcWYw01DdRzIjFOF2QcYnT8lw4jJMlzF3KubwtcE8IVJJivuVZHeMF5b+yUCgRTnSST4e9+cIGBk62075QEiK99AgkWd8ncl++xKOvOi9UcFFQFKT8eoV9e8r9rfVBucjKQkAklm1zUz1/riwmKUcW90PIzZi4WPawCgZAi8/tDRptNCFRBQdoep9d1wIIbvusXxZodAt6+gQJVaKmoZOBsQzGHaK5AsryRTm7VBBGOyeViNrTnZSAp6qo5y47p0W+1Hnvx4+tgGaoTc3o0QtM3qvMWXm5BLiGcMJFjI922y939cEAF3Db3VJ4T97gU35DbvnKkS2IFV3S35FxuNh047GboOBAAm0n00v0x8AapFQ5wXxH+WsxgbhP3OLR7sKsmheUk1eRcHqnHHuMGAb4ul+cbRoIgdTIPVo8ZrzyefZJqzwR5JOlc4gd47aFUCvRyDel4vO2oWD2S4q8HrQ="];
         
+//        NSString *javaScriptCall = [NSString stringWithFormat:@"customFunc()"];
+//        [self.architectView callJavaScript:javaScriptCall];
+
         
         /* The Architect World can be loaded independently from the WTArchitectView rendering.
          
@@ -241,6 +244,9 @@
     
     - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url
     {
+//        [self.architectView callJavaScript:[NSString stringWithFormat:@"alert('%d, %d, %d, %d')", 1, 2, 3, 4]];
+        
+ 
         NSLog(@"CALLING");
         
         if (!self.myTempView.hidden){
@@ -265,6 +271,9 @@
         }
         }
         if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?id"]) {
+            //calling
+            [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc()"]];
+            // not calling
             
             NSDictionary *parameters = nil;//[self parseURLParameterFromURL:[url absoluteString]];
             
