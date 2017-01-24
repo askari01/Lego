@@ -33,7 +33,15 @@
 
 		// you may define some custom action when user pressed radar, e.g. display distance, custom filtering etc.
 		clickedRadar: function clickedRadarFn() {
-			alert("Radar Clicked");
+			alert("Current Location is "+ World.userLocation.latitude + " "+ World.userLocation.longitude);
+            var singlePoi = {
+                            "id": 1,
+                            "latitude": parseFloat(World.userLocation.latitude),
+                            "longitude": parseFloat(World.userLocation.longitude),
+                            "altitude": parseFloat(World.userLocation.altitude),
+                            "title": "Baby I like it",
+                            "description": "Happy Phyril"
+                        }
 		},
 
 		setMaxDistance: function setMaxDistanceFn(maxDistanceMeters) {

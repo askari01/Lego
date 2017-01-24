@@ -31,7 +31,7 @@ var World = {
 
 	locationUpdateCounter: 0,
 	updatePlacemarkDistancesEveryXLocationUpdates: 10,
-
+    
 	// called to inject new POI data
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
 
@@ -39,9 +39,9 @@ var World = {
 		AR.context.destroyAll();
 
 		// show radar & set click-listener
-//		PoiRadar.show();
-//		$('#radarContainer').unbind('click');
-//		$("#radarContainer").click(PoiRadar.clickedRadar);
+		PoiRadar.show();
+		$('#radarContainer').unbind('click');
+        $("#radarContainer").click(PoiRadar.clickedRadar);
 
 		// empty list of visible markers
 		World.markerList = [];
@@ -52,18 +52,30 @@ var World = {
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
-		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
-			var singlePoi = {
-				"id": poiData[currentPlaceNr].id,
-				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
-				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
-				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
-				"title": poiData[currentPlaceNr].name,
-				"description": poiData[currentPlaceNr].description
-			};
-
-			World.markerList.push(new Marker(singlePoi));
-		}
+//		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+//			var singlePoi = {
+//				"id": poiData[currentPlaceNr].id,
+//				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
+//				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
+//				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
+//				"title": poiData[currentPlaceNr].name,
+//				"description": poiData[currentPlaceNr].description
+//			};
+//
+//			World.markerList.push(new Marker(singlePoi));
+//		}
+        
+//        // add a last POI Custom
+        var singlePoi = {
+            "id": 1,
+            "latitude": parseFloat(World.userLocation.latitude),
+            "longitude": parseFloat(World.userLocation.longitude),
+            "altitude": parseFloat(World.userLocation.altitude),
+            "title": "Baby I like it",
+            "description": "Happy Phyril"
+        }
+//        // populate the last single custom Poi OnScreen
+        World.markerList.push(new Marker(singlePoi));
 
 		// updates distance information of all placemarks
 		World.updateDistanceToUserValues();
@@ -74,6 +86,13 @@ var World = {
 		$("#panel-distance-range").val(100);
 		$("#panel-distance-range").slider("refresh");
 	},
+    
+    // Custom Func
+    CustomFunc: function CustomFunc() {
+        AR.logger.debug("ji");
+        alert ("ji");
+    
+    },
 
 	// sets/updates distances of all makers so they are available way faster than calling (time-consuming) distanceToUser() method all the time
 	updateDistanceToUserValues: function updateDistanceToUserValuesFn() {
