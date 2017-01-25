@@ -28,8 +28,7 @@
 
 @implementation ViewController
 
-- (void)dealloc
-{
+- (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -82,6 +81,8 @@
 //        _myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
  
         self.myTempView.hidden = true;
+        self.addMarker.hidden = true;
+        
         _picView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picImage:)];
         tapGesture.numberOfTapsRequired = 1;
@@ -102,7 +103,6 @@
         NSLog(@"This device is not supported. Show either an alert or use this class method even before presenting the view controller that manages the WTArchitectView. Error: %@", [deviceSupportError localizedDescription]);
     }
 }
-    
 
 #pragma mark - View Lifecycle
 - (void)viewWillAppear:(BOOL)animated {
@@ -242,38 +242,30 @@
     });
 }
     
-    - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url
-    {
+- (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url {
 //        [self.architectView callJavaScript:[NSString stringWithFormat:@"alert('%d, %d, %d, %d')", 1, 2, 3, 4]];
         
  
         NSLog(@"CALLING");
         
         if (!self.myTempView.hidden){
-        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
-                        NSLog(@"closing");
-            
-            //            self.myTempView .hidden = false;
-            //            CGSize size = [UIScreen mainScreen].bounds.size;
-            [UIView animateWithDuration:0.5
+            self.addMarker.hidden = false;
+            if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
+                [UIView animateWithDuration:0.5
                                   delay:0.1
                                 options: UIViewAnimationCurveEaseIn
                              animations:^{
-                                 //                                 NSLog(@"closing");
                                  self.myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
                              }
                              completion:^(BOOL finished){
                                  if (finished)
-                                     self.myTempView .hidden = true;
-                                 //                                     [self.myTempView removeFromSuperview];
+                                     self.myTempView.hidden = true;
+                                 //[self.myTempView removeFromSuperview];
                              }];
-            //            self.myTempView .hidden = true;
-        }
+           }
         }
         if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?id"]) {
-            //calling
-            [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc()"]];
-            // not calling
+
             
             NSDictionary *parameters = nil;//[self parseURLParameterFromURL:[url absoluteString]];
             
@@ -304,24 +296,24 @@
             }
 
             NSLog(@"tag is %@", tag);
-            
             if (self.myTempView.hidden){
-                
-            self.myTempView .hidden = false;
-            [UIView animateWithDuration:0.5
+                self.myTempView .hidden = false;
+                [UIView animateWithDuration:0.5
                                   delay:0.1
                                 options: UIViewAnimationCurveEaseIn
                              animations:^{
-//                                 NSLog(@"opening");
                                  _myTempView.frame = CGRectMake(0, 420, [[UIScreen mainScreen] bounds].size.width, 360);
                              }
                              completion:^(BOOL finished){
                              }];
-            
-            [self.view addSubview:_myTempView];
+                [self.view addSubview:_myTempView];
             }
-//            self.label.text = @"123456";
-//            _label.text = @"44554";
+        }
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?addMarker"]) {
+            if (self.addMarker.hidden){
+                self.addMarker.hidden = false;
+                [self.view addSubview:_addMarker];
+            }
         }
     }
 
@@ -349,6 +341,15 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (IBAction)addMarkerFn:(id)sender {
+    self.addMarker.hidden = true;
+    NSMutableString *markerLblTxt = _markerLbl.text;
+    NSMutableString *markerDescTxt = _markerDesc.text;
+    NSLog(@"hello: %@",markerDescTxt);
+    [self.addMarker endEditing:YES];
+    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
 }
 
 @end

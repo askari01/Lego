@@ -401,17 +401,17 @@ AR.context.onLocationChanged = World.locationChanged;
 /* forward clicks in empty area to World */
 AR.context.onScreenClick = World.onScreenClick;
 
-function customFunc () {
+function customFunc ( markerLbl, markerDesc ) {
     AR.context.destroyAll();
     alert("Hello sexy");
     // add a last POI Custom
     var singlPoi = {
         "id": 21,
-        "latitude": parseFloat(World.userLocation.latitude),
-        "longitude": parseFloat(World.userLocation.longitude),
+        "latitude": parseFloat(World.userLocation.latitude + 0.000001),
+        "longitude": parseFloat(World.userLocation.longitude + 0.000001),
         "altitude": parseFloat(World.userLocation.altitude),
-        "title": "ChainSMoker",
-        "description": "Are we fading lovers"
+        "title": markerLbl,
+        "description": markerDesc
     }
 //    abc ();
     // populate the last single custom Poi OnScreen

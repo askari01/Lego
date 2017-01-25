@@ -17,6 +17,8 @@
     @property (weak, nonatomic) IBOutlet UILabel *cordinatesLbl;
     @property (weak, nonatomic) IBOutlet UILabel *descriptionLbl;
     @property (weak, nonatomic) IBOutlet UIImageView *picView;
+    @property (weak, nonatomic) IBOutlet UITextField *markerLbl;
+    @property (weak, nonatomic) IBOutlet UITextView *markerDesc;
 
 //
 //@property (nonatomic, strong) WTArchitectView               *architectView;
@@ -27,7 +29,8 @@
 - (void) picImage: (id)sender ;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
-    @property (weak, nonatomic) IBOutlet UIView *addmarker;
+@property (weak, nonatomic) IBOutlet UICollectionView *addMarker;
+
     
 @end
 
