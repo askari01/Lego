@@ -18,7 +18,7 @@ function Marker(poiData) {
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
 
     // create an AR.ImageDrawable for the marker in idle state
-    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 2.5, {
+    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 6, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -28,7 +28,7 @@ function Marker(poiData) {
     });
 
     // create an AR.ImageDrawable for the marker in selected state
-    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 2.5, {
+    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 6, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null
@@ -37,7 +37,7 @@ function Marker(poiData) {
     // create an AR.Label for the marker's title 
     this.titleLabel = new AR.Label(poiData.title.trunc(10), 1, {
         zOrder: 1,
-        offsetY: 0.55,
+        offsetY: 1.95,
         style: {
             textColor: '#000000',
             fontStyle: AR.CONST.FONT_STYLE.BOLD
@@ -47,14 +47,14 @@ function Marker(poiData) {
     // create an AR.Label for the marker's description
     this.descriptionLabel = new AR.Label(poiData.description.trunc(15), 0.8, {
         zOrder: 1,
-        offsetY: -0.55,
+        offsetY: 0.15,
         style: {
             textColor: '#000000'
         }
     });
 
     // create an AR.Label for distance in marker
-    this.distance = new AR.Label(poiData.distance, 0.0, {
+    this.distance = new AR.Label(poiData.distance, 0.8, {
                                  zOrder: 1,
                                  offsetY: 0.55,
                                  style: {

@@ -27,6 +27,7 @@
 - (void) picImage: (id)sender ;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
+    @property (weak, nonatomic) IBOutlet UIView *addmarker;
     
 @end
 

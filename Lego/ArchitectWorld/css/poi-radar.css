@@ -15,3 +15,11 @@
 	width:100px;
 	height:100px;
 }
+
+.markerContainer_right {
+    position:absolute;
+    top:35px;
+    right:0px;
+    width:100px;
+    height:100px;
+}

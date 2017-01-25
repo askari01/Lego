@@ -36,7 +36,11 @@ var World = {
     // call solo poi data
     createPoiFromJsonData: function createPoiFromJsonDataFn(poiData){
         AR.context.destroyAll();
-
+        PoiRadar.show();
+        $('#radarContainer').unbind('click');
+        $("#radarContainer").click(PoiRadar.clickedRadar);
+        PoiRadar.updatePosition();
+        
         alert("Hello beautiful"+ World.markerList);
 //        AR.logger.debug("Hello beautiful");
 //        AR.logger.debug("Hello beautiful");
@@ -153,7 +157,8 @@ var World = {
 
 	// location updates, fired every time you call architectView.setLocation() in native environment
 	locationChanged: function locationChangedFn(lat, lon, alt, acc) {
-
+        
+        AR.logger.debug("onLocatoinChange");
 		// store user's current location in World.userLocation, so you always know where user is
 		World.userLocation = {
 			'latitude': lat,
