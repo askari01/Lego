@@ -246,12 +246,19 @@
 //        [self.architectView callJavaScript:[NSString stringWithFormat:@"alert('%d, %d, %d, %d')", 1, 2, 3, 4]];
         
  
-        NSLog(@"CALLING");
-        
+        NSLog(@"CALLING '%@'", url);
+    
+        if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
+            if (!self.addMarker.hidden){
+                self.addMarker.hidden = true;
+            }
+        }
+    
         if (!self.myTempView.hidden){
-            self.addMarker.hidden = false;
+//            self.addMarker.hidden = false;
             if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
-                [UIView animateWithDuration:0.5
+                
+                                [UIView animateWithDuration:0.5
                                   delay:0.1
                                 options: UIViewAnimationCurveEaseIn
                              animations:^{
@@ -315,6 +322,12 @@
                 [self.view addSubview:_addMarker];
             }
         }
+    if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?closeAddMarker"]) {
+        if (!self.addMarker.hidden){
+            self.addMarker.hidden = true;
+            [self.view addSubview:_addMarker];
+        }
+    }
     }
 
 - (void) picImage: (id)sender {

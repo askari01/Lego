@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="458" width="320" height="110"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="4l6-6j-bct"/>
+                                    <constraint firstAttribute="height" constant="110" id="PzJ-rK-rlN"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kET-tG-gpj">
                                     <size key="itemSize" width="50" height="50"/>
@@ -68,50 +69,66 @@
                                 </view>
                                 <cells/>
                             </collectionView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lFq-pq-i2F">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cTc-Z0-apj">
                                 <rect key="frame" x="40" y="220" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hte-CW-EeQ">
-                                        <rect key="frame" x="8" y="40" width="224" height="80"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7S-aj-Hx2">
-                                        <rect key="frame" x="186" y="7" width="46" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.80507205310880825" green="0.80507205310880825" blue="0.80507205310880825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Add"/>
-                                    </button>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="omw-gn-7hR">
-                                        <rect key="frame" x="8" y="8" width="174" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" red="0.43057804404145072" green="0.43057804404145072" blue="0.43057804404145072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xS3-ts-Lrd">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" fixedFrame="YES" id="lFq-pq-i2F">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Hte-CW-EeQ">
+                                            <rect key="frame" x="8" y="40" width="224" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert"/>
+                                        </textView>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D7S-aj-Hx2">
+                                            <rect key="frame" x="186" y="7" width="46" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="tintColor" red="0.80507205310880825" green="0.80507205310880825" blue="0.80507205310880825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <state key="normal" title="Add"/>
+                                            <connections>
+                                                <action selector="addMarkerFn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LMA-ir-EkA"/>
+                                            </connections>
+                                        </button>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="omw-gn-7hR">
+                                            <rect key="frame" x="8" y="8" width="174" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        </textField>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.43057804404145072" green="0.43057804404145072" blue="0.43057804404145072" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </view>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0fH-lg-nNA" secondAttribute="bottom" id="5BK-xV-H9D"/>
-                            <constraint firstAttribute="trailing" secondItem="0fH-lg-nNA" secondAttribute="trailing" id="8LO-XO-XSh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="0fH-lg-nNA" secondAttribute="bottom" id="MTV-MO-fVZ"/>
-                            <constraint firstItem="0fH-lg-nNA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kZf-uu-LWA"/>
-                            <constraint firstAttribute="trailing" secondItem="0fH-lg-nNA" secondAttribute="trailing" id="ttn-Yk-rN1"/>
-                            <constraint firstItem="0fH-lg-nNA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="vKo-ES-d0u"/>
+                            <constraint firstItem="cTc-Z0-apj" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="200" id="3DH-gQ-q6c"/>
+                            <constraint firstAttribute="trailing" secondItem="0fH-lg-nNA" secondAttribute="trailing" id="6UN-e5-gBB"/>
+                            <constraint firstItem="cTc-Z0-apj" firstAttribute="centerX" secondItem="0fH-lg-nNA" secondAttribute="centerX" id="Ein-GO-e7U"/>
+                            <constraint firstItem="0fH-lg-nNA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="F4V-l4-9oO"/>
+                            <constraint firstItem="0fH-lg-nNA" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="K3f-Em-2N5"/>
+                            <constraint firstItem="cTc-Z0-apj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="24" id="R2J-x5-VxT"/>
+                            <constraint firstItem="cTc-Z0-apj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vnq-HQ-5fc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addmarker" destination="lFq-pq-i2F" id="0vR-ab-2br"/>
+                        <outlet property="addMarker" destination="cTc-Z0-apj" id="lE7-Tj-wzS"/>
                         <outlet property="cordinatesLbl" destination="7xD-CO-0Vq" id="8KY-Kz-p6c"/>
                         <outlet property="descriptionLbl" destination="64R-VS-J4c" id="4yz-0h-QJH"/>
                         <outlet property="mainLbl" destination="79n-W2-rID" id="fjq-o1-29K"/>
+                        <outlet property="markerDesc" destination="Hte-CW-EeQ" id="lgf-54-VlF"/>
+                        <outlet property="markerLbl" destination="omw-gn-7hR" id="q7P-Ab-FeM"/>
                         <outlet property="myTempView" destination="0fH-lg-nNA" id="PTT-DX-Py3"/>
                         <outlet property="picView" destination="tVg-mn-9Wa" id="bgx-IJ-idT"/>
                     </connections>

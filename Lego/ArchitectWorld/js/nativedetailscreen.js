@@ -41,7 +41,7 @@ var World = {
         $("#radarContainer").click(PoiRadar.clickedRadar);
         PoiRadar.updatePosition();
         
-        alert("Hello beautiful"+ World.markerList);
+//        alert("Hello beautiful"+ World.markerList);
 //        AR.logger.debug("Hello beautiful");
 //        AR.logger.debug("Hello beautiful");
         // start loading marker assets
@@ -49,13 +49,16 @@ var World = {
         World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
         World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
         
-        World.markerList.push(new Marker(poiData));
-        alert("Hello again"+ World.markerList);
+//        World.markerList.push(new Marker(poiData));
+        currentMarker = new Marker(poiData);
+        World.onMarkerSelected(currentMarker);
+//        alert("Hello again"+ World.markerList);
         // updates distance information of all placemarks
         World.updateDistanceToUserValues();
         
         World.updateStatusMessage(currentPlaceNr + ' places loaded');
-
+        var architectSdkUrl = "architectsdk://markerselected?closeAddMarker";
+        document.location = architectSdkUrl;
         
     },
     
@@ -403,12 +406,12 @@ AR.context.onScreenClick = World.onScreenClick;
 
 function customFunc ( markerLbl, markerDesc ) {
     AR.context.destroyAll();
-    alert("Hello sexy");
+//    alert("Hello sexy");
     // add a last POI Custom
     var singlPoi = {
         "id": 21,
-        "latitude": parseFloat(World.userLocation.latitude + 0.000001),
-        "longitude": parseFloat(World.userLocation.longitude + 0.000001),
+        "latitude": parseFloat(World.userLocation.latitude + 0.00001),
+        "longitude": parseFloat(World.userLocation.longitude + 0.00001),
         "altitude": parseFloat(World.userLocation.altitude),
         "title": markerLbl,
         "description": markerDesc

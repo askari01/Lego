@@ -387,7 +387,7 @@
 				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.askari01.sps.Lego;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sps.lego;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -404,7 +404,7 @@
 				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.askari01.sps.Lego;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sps.lego;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
