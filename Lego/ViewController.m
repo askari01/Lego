@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 //    NSLog(@"inside xxxxxx");
 //    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
     
@@ -362,7 +363,55 @@
     NSMutableString *markerDescTxt = _markerDesc.text;
     NSLog(@"hello: %@",markerDescTxt);
     [self.addMarker endEditing:YES];
-    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
+    
+//    @{
+//      @"id": @21,
+//      @"latitude": @123,
+//      @"longitude": @321,
+//      @"altitude": @55,
+//      @"title": @"title",
+//      @"description": @"dec"
+//      }
+    NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
+    [json setObject:@12 forKey:@"id"];
+    [json setObject:@34.0044346 forKey:@"latitude"];
+    [json setObject:@71.5033042 forKey:@"longitude"];
+    [json setObject:@12 forKey:@"altitude"];
+    [json setObject:markerLblTxt forKey:@"title"];
+    [json setObject:markerDescTxt forKey:@"description"];
+    NSString *jsonString;
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:json
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    
+    if (! jsonData) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",jsonString);
+    }
+    
+    
+//    NSLog(@"Boy: %@", json);
+    
+    NSMutableArray *abc = [[NSMutableArray alloc] init];
+    [abc addObject:json];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if (markerLblTxt.length >0){
+        [[NSUserDefaults standardUserDefaults] setObject: markerLblTxt forKey: @ "MarkerLblTxt"];
+        [defaults synchronize];
+    }
+    NSDictionary * recoveredString = [[NSUserDefaults standardUserDefaults] valueForKey: @ "MarkerLblTxt"];
+    if (recoveredString != nil){
+        NSLog(@"'%@'",recoveredString);
+    }
+
+    NSLog(@"%@", [NSString stringWithFormat:@"Func( '%@' )", jsonString]);
+//    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
+    [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString]];
 }
 
 @end

@@ -18,7 +18,7 @@ function Marker(poiData) {
     var markerLocation = new AR.GeoLocation(poiData.latitude, poiData.longitude, poiData.altitude);
 
     // create an AR.ImageDrawable for the marker in idle state
-    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 6, {
+    this.markerDrawable_idle = new AR.ImageDrawable(World.markerDrawable_idle, 4, {
         zOrder: 0,
         opacity: 1.0,
         /*
@@ -28,7 +28,7 @@ function Marker(poiData) {
     });
 
     // create an AR.ImageDrawable for the marker in selected state
-    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 6, {
+    this.markerDrawable_selected = new AR.ImageDrawable(World.markerDrawable_selected, 4, {
         zOrder: 0,
         opacity: 0.0,
         onClick: null

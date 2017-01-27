@@ -51,7 +51,8 @@ var World = {
         
 //        World.markerList.push(new Marker(poiData));
         currentMarker = new Marker(poiData);
-        World.onMarkerSelected(currentMarker);
+//        World.onMarkerSelected(currentMarker);
+        currentMarker .setSelected(currentMarker);
 //        alert("Hello again"+ World.markerList);
         // updates distance information of all placemarks
         World.updateDistanceToUserValues();
@@ -64,7 +65,7 @@ var World = {
     
 	// called to inject new POI data
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
-
+        AR.logger.debug("u  i am being valledskdfh");
 		// destroys all existing AR-Objects (markers & radar)
 		AR.context.destroyAll();
 
@@ -82,7 +83,7 @@ var World = {
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
 
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
-		for (var currentPlaceNr = 0; currentPlaceNr < poiData.length; currentPlaceNr++) {
+		for (var currentPlaceNr = 0; currentPlaceNr < 1; currentPlaceNr++) {
 			var singlePoi = {
 				"id": poiData[currentPlaceNr].id,
 				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
@@ -357,6 +358,10 @@ var World = {
 			World.updateStatusMessage('Already requesing places...', true);
 		}
 	},
+    
+    myTemp : function() {
+        alert("called");
+    },
 
 	// request POI data
 	requestDataFromServer: function requestDataFromServerFn(lat, lon) {
@@ -422,6 +427,7 @@ function customFunc ( markerLbl, markerDesc ) {
     
 }
 
-function abc(){
-    alert("hello abc");
+function Func(data1){
+    alert(data1);
+    World.createPoiFromJsonData(json);
 }
