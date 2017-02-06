@@ -92,8 +92,10 @@ var World = {
 				"title": poiData[currentPlaceNr].name,
 				"description": poiData[currentPlaceNr].description
 			};
-
-			World.markerList.push(new Marker(singlePoi));
+            
+            var abc = new Marker(singlePoi);
+			World.markerList.push(abc);
+            World.onMarkerSelected(abc);
 		}
         
 //        // add a last POI Custom
@@ -188,7 +190,7 @@ var World = {
 	// fired when user pressed maker in cam
 	onMarkerSelected: function onMarkerSelectedFn(marker) {
 		
-
+//        alert ("1");
 		// update panel values
 		$("#poi-detail-title").html(marker.poiData.title);
 		$("#poi-detail-description").html(marker.poiData.description);
@@ -196,44 +198,49 @@ var World = {
 		var distanceToUserValue = (marker.distanceToUser > 999) ? ((marker.distanceToUser / 1000).toFixed(2) + " km") : (Math.round(marker.distanceToUser) + " m");
 
 		$("#poi-detail-distance").html(distanceToUserValue);
-
+//        alert ("2");
 		// show panel
 //		$("#panel-poidetail").panel("open", 123);
         
         // deselect previous marker
         if (World.currentMarker) {
+//            alert ("3");
             AR.logger.debug (World.currentMarker.poiData.id + " " +marker.poiData.id + " :"+World.currentMarker.deselect);
             if (World.currentMarker.poiData.id == marker.poiData.id) {
                 var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(World.currentMarker.poiData.id) + "&title=" + encodeURIComponent(World.currentMarker.poiData.title) + "&description=" + encodeURIComponent(World.currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
                 document.location = architectSdkUrl;
-                
+//                alert ("4");
                 $(".ui-panel-dismiss").unbind("mousedown");
                 return;
             }
             var architectSdkUrl = "architectsdk://markerselected?Close";
             document.location = architectSdkUrl;
+//            alert ("5");
             AR.logger.info("deselect1");
-            World.currentMarker.setDeselected(World.currentMarker);
+//            World.currentMarker.setDeselected(World.currentMarker);
         }
         
+//        alert ("6");
         // highlight current one
         marker.setSelected(marker);
         World.currentMarker = marker;
-        
+//        alert ("7");
         var currentMarker = World.currentMarker;
 
         
         var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(currentMarker.poiData.id) + "&title=" + encodeURIComponent(currentMarker.poiData.title) + "&description=" + encodeURIComponent(currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
+//        alert ("8");
         document.location = architectSdkUrl;
         
 		$(".ui-panel-dismiss").unbind("mousedown");
-
+//        alert ("9");
 		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
             AR.logger.info("deselect");
                                  var architectSdkUrl = "architectsdk://markerselected?Close";
                                  document.location = architectSdkUrl;
 			World.currentMarker.setDeselected(World.currentMarker);
 		});
+//        alert ("10");
 	},
 
 	// screen was clicked but no geo-object was hit
@@ -428,6 +435,6 @@ function customFunc ( markerLbl, markerDesc ) {
 }
 
 function Func(data1){
-    alert(data1);
-    World.createPoiFromJsonData(json);
+//    alert(data1);
+    World.createPoiFromJsonData(data1);
 }

@@ -35,7 +35,12 @@ var PoiRadar = {
 		// you may define some custom action when user pressed radar, e.g. display distance, custom filtering etc.
 		clickedRadar: function clickedRadarFn() {
 //			alert("Current Location is "+ World.userLocation.latitude + " "+ World.userLocation.longitude);
-            var architectSdkUrl = "architectsdk://markerselected?addMarker";
+            // turn off detail if anymarker is selected
+            var architectSdkUrl = "architectsdk://markerselected?Close";
+            document.location = architectSdkUrl;
+            World.currentMarker.setDeselected(World.currentMarker);
+            
+            architectSdkUrl = "architectsdk://markerselected?addMarker";
             document.location = architectSdkUrl;
         },
 

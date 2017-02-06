@@ -27,14 +27,13 @@
 		3612CCD91E28B1D600BF8348 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */; };
 		3612CCDA1E28B1D600BF8348 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC71E28B1D600BF8348 /* UIKit.framework */; };
 		3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */ = {isa = PBXBuildFile; fileRef = 3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */; };
-		364688711E2E27B800472337 /* Web in Resources */ = {isa = PBXBuildFile; fileRef = 364688701E2E27B800472337 /* Web */; };
-		3685868F1E2F8E9D005C0EEA /* WikitudeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */; };
 		36D0C68E1E289A94004834EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C68D1E289A94004834EB /* main.m */; };
 		36D0C6911E289A94004834EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6901E289A94004834EB /* AppDelegate.m */; };
 		36D0C6941E289A94004834EB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6931E289A94004834EB /* ViewController.m */; };
 		36D0C6971E289A94004834EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D0C6951E289A94004834EB /* Main.storyboard */; };
 		36D0C6991E289A94004834EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D0C6981E289A94004834EB /* Assets.xcassets */; };
 		36D0C69C1E289A94004834EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36D0C69A1E289A94004834EB /* LaunchScreen.storyboard */; };
+		36DCA64D1E485E990064F0D8 /* WikitudeSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36DCA64C1E485E990064F0D8 /* WikitudeSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,9 +56,7 @@
 		3612CCC51E28B1D600BF8348 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3612CCC71E28B1D600BF8348 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WikitudeSDK.framework; path = Lego/Framework/WikitudeSDK.framework; sourceTree = "<group>"; };
 		3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ArchitectWorld; path = Lego/ArchitectWorld; sourceTree = "<group>"; };
-		364688701E2E27B800472337 /* Web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Web; path = Lego/ArchitectWorld/Web; sourceTree = "<group>"; };
 		3685868D1E2F8E88005C0EEA /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Framework; path = Lego/Framework; sourceTree = "<group>"; };
 		36D0C6891E289A94004834EB /* Lego.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lego.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0C68D1E289A94004834EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -71,6 +68,7 @@
 		36D0C6981E289A94004834EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36D0C69B1E289A94004834EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		36D0C69D1E289A94004834EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		36DCA64C1E485E990064F0D8 /* WikitudeSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WikitudeSDK.framework; path = Lego/Framework/WikitudeSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3685868F1E2F8E9D005C0EEA /* WikitudeSDK.framework in Frameworks */,
+				36DCA64D1E485E990064F0D8 /* WikitudeSDK.framework in Frameworks */,
 				3612CCC81E28B1D600BF8348 /* Accelerate.framework in Frameworks */,
 				3612CCC91E28B1D600BF8348 /* AssetsLibrary.framework in Frameworks */,
 				3612CCCA1E28B1D600BF8348 /* AVFoundation.framework in Frameworks */,
@@ -107,8 +105,8 @@
 		3612CCB41E28B1D500BF8348 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36DCA64C1E485E990064F0D8 /* WikitudeSDK.framework */,
 				3685868D1E2F8E88005C0EEA /* Framework */,
-				3612CCDB1E28B1E800BF8348 /* WikitudeSDK.framework */,
 				3612CCB51E28B1D600BF8348 /* Accelerate.framework */,
 				3612CCB61E28B1D600BF8348 /* AssetsLibrary.framework */,
 				3612CCB71E28B1D600BF8348 /* AVFoundation.framework */,
@@ -142,7 +140,6 @@
 		36D0C6801E289A93004834EB = {
 			isa = PBXGroup;
 			children = (
-				364688701E2E27B800472337 /* Web */,
 				3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */,
 				36D0C68B1E289A94004834EB /* Lego */,
 				36D0C68A1E289A94004834EB /* Products */,
@@ -242,7 +239,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				364688711E2E27B800472337 /* Web in Resources */,
 				36D0C69C1E289A94004834EB /* LaunchScreen.storyboard in Resources */,
 				3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */,
 				36D0C6991E289A94004834EB /* Assets.xcassets in Resources */,
@@ -387,7 +383,7 @@
 				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sps.lego;
+				PRODUCT_BUNDLE_IDENTIFIER = com.askari.AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -404,7 +400,7 @@
 				);
 				INFOPLIST_FILE = Lego/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.sps.lego;
+				PRODUCT_BUNDLE_IDENTIFIER = com.askari.AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
