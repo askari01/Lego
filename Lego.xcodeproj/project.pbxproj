@@ -27,6 +27,7 @@
 		3612CCD91E28B1D600BF8348 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */; };
 		3612CCDA1E28B1D600BF8348 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3612CCC71E28B1D600BF8348 /* UIKit.framework */; };
 		3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */ = {isa = PBXBuildFile; fileRef = 3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */; };
+		366057B51E4A284300147B0B /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366057B41E4A284300147B0B /* Hello.swift */; };
 		36D0C68E1E289A94004834EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C68D1E289A94004834EB /* main.m */; };
 		36D0C6911E289A94004834EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6901E289A94004834EB /* AppDelegate.m */; };
 		36D0C6941E289A94004834EB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6931E289A94004834EB /* ViewController.m */; };
@@ -57,6 +58,8 @@
 		3612CCC61E28B1D600BF8348 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3612CCC71E28B1D600BF8348 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ArchitectWorld; path = Lego/ArchitectWorld; sourceTree = "<group>"; };
+		366057B31E4A284300147B0B /* Lego-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lego-Bridging-Header.h"; sourceTree = "<group>"; };
+		366057B41E4A284300147B0B /* Hello.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hello.swift; sourceTree = "<group>"; };
 		3685868D1E2F8E88005C0EEA /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Framework; path = Lego/Framework; sourceTree = "<group>"; };
 		36D0C6891E289A94004834EB /* Lego.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lego.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D0C68D1E289A94004834EB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -167,6 +170,8 @@
 				36D0C69A1E289A94004834EB /* LaunchScreen.storyboard */,
 				36D0C69D1E289A94004834EB /* Info.plist */,
 				36D0C68C1E289A94004834EB /* Supporting Files */,
+				366057B41E4A284300147B0B /* Hello.swift */,
+				366057B31E4A284300147B0B /* Lego-Bridging-Header.h */,
 			);
 			path = Lego;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 					36D0C6881E289A93004834EB = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = SJ49GZ2K5L;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -255,6 +261,7 @@
 			files = (
 				36D0C6941E289A94004834EB /* ViewController.m in Sources */,
 				36D0C6911E289A94004834EB /* AppDelegate.m in Sources */,
+				366057B51E4A284300147B0B /* Hello.swift in Sources */,
 				36D0C68E1E289A94004834EB /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +382,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SJ49GZ2K5L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -385,6 +394,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.askari.AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lego/Lego-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -392,6 +404,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = SJ49GZ2K5L;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -402,6 +416,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.askari.AR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Lego/Lego-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

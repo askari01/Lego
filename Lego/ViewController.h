@@ -27,6 +27,7 @@
 - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
 
 - (void) picImage: (id)sender ;
+//- (void) hi:;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
 @property (weak, nonatomic) IBOutlet UICollectionView *addMarker;

@@ -11,6 +11,7 @@
 #import <WikitudeSDK/WikitudeSDK.h>
 /* Wikitude SDK debugging */
 #import <WikitudeSDK/WTArchitectViewDebugDelegate.h>
+#import <Lego-Swift.h>
 
 /*Wikitude SDK license key (EDU Purpose only) */
 #define kWT_LICENSE_KEY @"fZIgzrYWvaBSnaCuujQB6vcRpQESBV0aYvMaDo81Pkdh7SQAsEjB8WlEn1aZLV4izpTuEDnpspthKwFLPd2BU/H/q/Ig1eOCcaPhVftlmkgl7sQkUsvh/YJfmmQI+w8df/S3+LttkNMsw8OhW23nhjmay9gg8EgyJ1UmtksFn1hTYWx0ZWRfX5sExigS3PZKCgTLSeIQFvSoEETXB7vmzHWPBC/01hASFcnkMxL3HqfV2unlVrPuuAVn2Ys2C4SyOGjKZdMy35ViUEfpHEnXT2AZx3Tn+sbBA660RwwCuPOlw9OPI0VswRBgOuIA7Yp5OEfllLIcYFuUyFuoPMRIPhPPthSZjafy1N5KknNEFnu/3WqOE4cHCRZbgpV812ZWOp4CKQ0IxgT7Hlp7TP5GRId1gIkToNw28ahULOqm/D6xKodkbYZC2aqdlibmGRq3dHO+MxXS+ErBjbujOWXJFh3mJvWB0Ty1XQAPL+GYrV3829jm847epi9Dg9mxznOM04sLTLtGL0z1bGKH0XuH5LLWHURYCpT1erRll5PGglNZmBTSuJbt97PIMu61F9s3H+lGS0IDLjy8rRMlhfSel8W6pV5dCAA3BkkJzrM4Fb4X1xPxRGFMoGGSALAdwmXSqANH++KGXwjvRPuh7/E0z/JgC/zCBS1sw08wkEVYUbR5DF9YG6GY1+qjW/MyykQ4"
@@ -36,6 +37,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //
+    Hello1 *abc = [Hello1 new];
+    NSString *bb = [abc hi];
+    NSLog(@"%@", bb);
 //    NSLog(@"inside xxxxxx");
 //    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
     
