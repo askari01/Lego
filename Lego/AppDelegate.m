@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Firebase.h>
 
 @interface AppDelegate ()
 
@@ -16,7 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [FIRApp configure];
     // Override point for customization after application launch.
+    [FIRDatabase database].persistenceEnabled = YES;
     return YES;
 }
 

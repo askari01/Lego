@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <WikitudeSDK/WTArchitectView.h>
 #import <JavaScriptCore/JavaScriptCore.h>
-
+#import <Firebase.h>
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>
 @property (nonatomic,strong) JSContext *context;
