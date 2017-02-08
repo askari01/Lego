@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <WikitudeSDK/WTArchitectView.h>
 #import <JavaScriptCore/JavaScriptCore.h>
+#import <WikitudeSDK/WTArchitectViewDebugDelegate.h>
+#import <Lego-Swift.h>
 #import <Firebase.h>
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>

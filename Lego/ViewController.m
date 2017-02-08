@@ -10,8 +10,6 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <WikitudeSDK/WikitudeSDK.h>
 /* Wikitude SDK debugging */
-#import <WikitudeSDK/WTArchitectViewDebugDelegate.h>
-#import <Lego-Swift.h>
 
 
 /*Wikitude SDK license key (EDU Purpose only) */
@@ -30,7 +28,7 @@
 
 @implementation ViewController
 
-extern FIRDatabaseReference *ref;
+ FIRDatabaseReference *ref;
 
 - (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
@@ -421,8 +419,10 @@ extern FIRDatabaseReference *ref;
 
     NSLog(@"%@", [NSString stringWithFormat:@"Func( '%@' )", jsonString]);
 //    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
+    
     NSString *Item = [ref child: markerLblTxt];
-    [Item setValue:jsonString forKey: @"abc"];
+    NSLog(@"%@", Item);
+    [ref updateChildValues:json];
     [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString]];
 }
 
