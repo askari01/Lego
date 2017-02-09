@@ -29,11 +29,15 @@
 - (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
 
 - (void) picImage: (id)sender ;
+- (CLLocationCoordinate2D) getLocation;
+
 //- (void) hi:;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
 @property (weak, nonatomic) IBOutlet UICollectionView *addMarker;
+//@property (readonly, nonatomic) FIRStorage *_Nonnull storage;
 
-    
 @end
+
+
 

@@ -9,7 +9,7 @@ var ServerInformation = {
 
 // implementation of AR-Experience (aka "World")
 var World = {
-
+//    PoiRadar.show();
 	//  user's latest known location, accessible via userLocation.latitude, userLocation.longitude, userLocation.altitude
 	userLocation: null,
 

@@ -36,10 +36,10 @@ var PoiRadar = {
 		clickedRadar: function clickedRadarFn() {
 //			alert("Current Location is "+ World.userLocation.latitude + " "+ World.userLocation.longitude);
             // turn off detail if anymarker is selected
-            var architectSdkUrl = "architectsdk://markerselected?Close";
-            document.location = architectSdkUrl;
-            World.currentMarker.setDeselected(World.currentMarker);
-            
+//            var architectSdkUrl = "architectsdk://markerselected?Close";
+//            document.location = architectSdkUrl;
+//            World.currentMarker.setDeselected(World.currentMarker);
+//            
             architectSdkUrl = "architectsdk://markerselected?addMarker";
             document.location = architectSdkUrl;
         },

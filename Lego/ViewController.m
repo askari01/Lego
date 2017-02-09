@@ -29,6 +29,7 @@
 @implementation ViewController
 
  FIRDatabaseReference *ref;
+ FIRStorageReference *storageRef;
 
 - (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
@@ -39,7 +40,8 @@
     [super viewDidLoad];
     //
     ref = [[FIRDatabase database] referenceWithPath: @"marker"];
-    
+    storageRef = [[FIRStorage storage] referenceWithPath:@"marker_images"];
+    [storageRef child:@"hello"];
     //
     Hello1 *abc = [Hello1 new];
     NSString *bb = [abc hi];
@@ -97,6 +99,19 @@
         tapGesture.numberOfTapsRequired = 1;
         [tapGesture setDelegate:self];
         [_picView addGestureRecognizer:tapGesture];
+        
+        //
+        NSURL * file = [[NSURL alloc]initWithString:@"https://www.revive-adserver.com/media/GitHub.jpg"];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://www.revive-adserver.com/media/GitHub.jpg"]];
+        
+        NSString *imageName = [[NSUUID UUID] UUIDString];
+        [[storageRef child:imageName] putData:imageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+            if(error != nil){
+                NSLog(@"%@", error);
+            }else{
+                NSLog(@"bothing here");
+            }
+         }];
         
         self.architectView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -380,13 +395,23 @@
 //      @"title": @"title",
 //      @"description": @"dec"
 //      }
+    CLLocationCoordinate2D coordinate = [self getLocation];
+    NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
+    NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+    double lat = [latitude doubleValue];
+    NSNumber *lati = [[NSNumber alloc] initWithDouble:lat];
+    double lng = [longitude doubleValue];
+    NSNumber *lngi = [[NSNumber alloc] initWithDouble:lng];
+    
     NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
     [json setObject:@12 forKey:@"id"];
-    [json setObject:@34.0044346 forKey:@"latitude"];
-    [json setObject:@71.5033042 forKey:@"longitude"];
+    [json setObject:lati forKey:@"latitude"];
+    [json setObject:lngi forKey:@"longitude"];
     [json setObject:@12 forKey:@"altitude"];
     [json setObject:markerLblTxt forKey:@"title"];
     [json setObject:markerDescTxt forKey:@"description"];
+    [json setObject:@"link123" forKey:@"link"];
+    
     NSString *jsonString;
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:json
@@ -422,8 +447,22 @@
     
     NSString *Item = [ref child: markerLblTxt];
     NSLog(@"%@", Item);
-    [ref updateChildValues:json];
+//    [ref updateChildValues:json];
+//    [ref setValue:json];
+    [[ref child:markerLblTxt] setValue:json];
     [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString]];
+}
+
+-(CLLocationCoordinate2D) getLocation{
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init] ;
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    [locationManager startUpdatingLocation];
+    CLLocation *location = [locationManager location];
+    CLLocationCoordinate2D coordinate = [location coordinate];
+    
+    return coordinate;
 }
 
 @end
