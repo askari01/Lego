@@ -165,6 +165,9 @@ var World = {
 	locationChanged: function locationChangedFn(lat, lon, alt, acc) {
         
         AR.logger.debug("onLocatoinChange");
+        PoiRadar.show();
+        $('#radarContainer').unbind('click');
+        $("#radarContainer").click(PoiRadar.clickedRadar);
 		// store user's current location in World.userLocation, so you always know where user is
 		World.userLocation = {
 			'latitude': lat,
@@ -173,7 +176,7 @@ var World = {
 			'accuracy': acc
 		};
 
-
+        
 		// request data if not already present
 		if (!World.initiallyLoadedData) {
 			World.requestDataFromServer(lat, lon);
@@ -380,8 +383,14 @@ var World = {
 		// server-url to JSON content provider
 		var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
         var jqxhr = $.getJSON(serverUrl, function(data) {
-                AR.logger.info("data"+data[0].id);
-				World.loadPoisFromJsonData(data);
+                AR.logger.info("data complete:"+data);
+                AR.logger.info("data 0:"+data[0].id);
+                
+                              if (data){
+                                World.loadPoisFromJsonData(data);
+                              } else {
+                                AR.logger.info("data empty");
+                              }
 			})
 			.error(function(err) {
 				/*
