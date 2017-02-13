@@ -49,6 +49,11 @@
     Hello1 *abc = [Hello1 new];
     NSString *bb = [abc hi];
     NSLog(@"%@", bb);
+    [ref observeEventType:FIRDataEventTypeValue andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot * _Nonnull snapshot, NSString * _Nullable prevKey) {
+        NSDictionary *data = snapshot.value;
+        NSLog(@"%@", data);
+    }];
+    
 //    NSLog(@"inside xxxxxx");
 //    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
     
@@ -470,7 +475,7 @@
     NSLog(@"%@", [NSString stringWithFormat:@"Func( '%@' )", jsonString]);
 //    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
     
-    NSString *Item = [ref child: markerLblTxt];
+    NSString *Item = [ref child: [[NSUUID UUID] UUIDString]];
     NSLog(@"%@", Item);
 //    [ref updateChildValues:json];
 //    [ref setValue:json];
