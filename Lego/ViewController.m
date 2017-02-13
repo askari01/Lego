@@ -30,6 +30,7 @@
 
  FIRDatabaseReference *ref;
  FIRStorageReference *storageRef;
+ NSNumber *altitude;
 
 - (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
@@ -43,6 +44,8 @@
     storageRef = [[FIRStorage storage] referenceWithPath:@"marker_images"];
     [storageRef child:@"hello"];
     //
+    
+    
     Hello1 *abc = [Hello1 new];
     NSString *bb = [abc hi];
     NSLog(@"%@", bb);
@@ -99,19 +102,6 @@
         tapGesture.numberOfTapsRequired = 1;
         [tapGesture setDelegate:self];
         [_picView addGestureRecognizer:tapGesture];
-        
-        //
-        NSURL * file = [[NSURL alloc]initWithString:@"https://www.revive-adserver.com/media/GitHub.jpg"];
-        NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://www.revive-adserver.com/media/GitHub.jpg"]];
-        
-        NSString *imageName = [[NSUUID UUID] UUIDString];
-        [[storageRef child:imageName] putData:imageData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
-            if(error != nil){
-                NSLog(@"%@", error);
-            }else{
-                NSLog(@"bothing here");
-            }
-         }];
         
         self.architectView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -359,6 +349,8 @@
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
+    picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+//    picker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
@@ -370,7 +362,39 @@
     
     UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
     _picView.image = chosenImage;
+    NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
     
+    NSLog(@"%@", videoURL);
+    // For vid upload
+    if (videoURL){
+        NSLog(@"%@", videoURL);
+        NSString *vidName = [NSString stringWithFormat:@"%@.mov", [[NSUUID UUID] UUIDString]];
+        NSData * vidData = [[NSData alloc] initWithContentsOfURL: videoURL];
+        // commented for debugging uncomment when sending to client for pic or video upload
+        [[storageRef child:vidName] putData:vidData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+                    if(error != nil){
+                        NSLog(@"%@", error);
+                    }else{
+                        NSLog(@"bothing here: %@", metadata);
+                    }
+                }];
+    }else {
+    // For image upload
+//    NSURL * file = [[NSURL alloc]initWithString:@"https://www.revive-adserver.com/media/GitHub.jpg"];
+//    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://www.revive-adserver.com/media/GitHub.jpg"]];
+    
+    NSData *image = UIImagePNGRepresentation(chosenImage);
+    NSString *imageName = [NSString stringWithFormat:@"%@.png", [[NSUUID UUID] UUIDString]];
+    NSLog(@"%@",imageName);
+    // commented for debugging uncomment when sending to client for pic or video upload
+    [[storageRef child:imageName] putData:image metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+        if(error != nil){
+            NSLog(@"%@", error);
+        }else{
+            NSLog(@"bothing here: %@", metadata);
+        }
+    }];
+    }
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
@@ -398,6 +422,7 @@
     CLLocationCoordinate2D coordinate = [self getLocation];
     NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
+    
     double lat = [latitude doubleValue];
     NSNumber *lati = [[NSNumber alloc] initWithDouble:lat];
     double lng = [longitude doubleValue];
@@ -460,6 +485,7 @@
     locationManager.distanceFilter = kCLDistanceFilterNone;
     [locationManager startUpdatingLocation];
     CLLocation *location = [locationManager location];
+    altitude = [NSNumber numberWithDouble:location.altitude];
     CLLocationCoordinate2D coordinate = [location coordinate];
     
     return coordinate;

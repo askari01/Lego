@@ -29,7 +29,6 @@
 		3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */ = {isa = PBXBuildFile; fileRef = 3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */; };
 		366057B51E4A284300147B0B /* Hello.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366057B41E4A284300147B0B /* Hello.swift */; };
 		36619A2C1E4B336000EAE52C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 36619A2B1E4B336000EAE52C /* GoogleService-Info.plist */; };
-		36765F911E4DC85D002E2FA6 /* Test in Resources */ = {isa = PBXBuildFile; fileRef = 36765F901E4DC85D002E2FA6 /* Test */; };
 		36C0F68A1E4C5B4C0065D139 /* PicHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36C0F6891E4C5B4C0065D139 /* PicHandler.swift */; };
 		36D0C68E1E289A94004834EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C68D1E289A94004834EB /* main.m */; };
 		36D0C6911E289A94004834EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D0C6901E289A94004834EB /* AppDelegate.m */; };
@@ -65,7 +64,6 @@
 		366057B31E4A284300147B0B /* Lego-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lego-Bridging-Header.h"; sourceTree = "<group>"; };
 		366057B41E4A284300147B0B /* Hello.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hello.swift; sourceTree = "<group>"; };
 		36619A2B1E4B336000EAE52C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		36765F901E4DC85D002E2FA6 /* Test */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Test; path = Lego/Test; sourceTree = "<group>"; };
 		3685868D1E2F8E88005C0EEA /* Framework */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Framework; path = Lego/Framework; sourceTree = "<group>"; };
 		36C0F6891E4C5B4C0065D139 /* PicHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicHandler.swift; sourceTree = "<group>"; };
 		36D0C6891E289A94004834EB /* Lego.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lego.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +153,6 @@
 		36D0C6801E289A93004834EB = {
 			isa = PBXGroup;
 			children = (
-				36765F901E4DC85D002E2FA6 /* Test */,
 				3612CCDD1E28B3EB00BF8348 /* ArchitectWorld */,
 				36D0C68B1E289A94004834EB /* Lego */,
 				36D0C68A1E289A94004834EB /* Products */,
@@ -273,7 +270,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36765F911E4DC85D002E2FA6 /* Test in Resources */,
 				36D0C69C1E289A94004834EB /* LaunchScreen.storyboard in Resources */,
 				3612CCDE1E28B3EB00BF8348 /* ArchitectWorld in Resources */,
 				36619A2C1E4B336000EAE52C /* GoogleService-Info.plist in Resources */,

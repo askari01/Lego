@@ -12,6 +12,7 @@
 #import <WikitudeSDK/WTArchitectViewDebugDelegate.h>
 #import <Lego-Swift.h>
 #import <Firebase.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>
 @property (nonatomic,strong) JSContext *context;
