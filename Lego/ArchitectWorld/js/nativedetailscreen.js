@@ -35,7 +35,7 @@ var World = {
     
     // call solo poi data
     createPoiFromJsonData: function createPoiFromJsonDataFn(poiData){
-        AR.context.destroyAll();
+//        AR.context.destroyAll();
         PoiRadar.show();
         $('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
@@ -65,7 +65,7 @@ var World = {
     
 	// called to inject new POI data
 	loadPoisFromJsonData: function loadPoisFromJsonDataFn(poiData) {
-        AR.logger.debug("u  i am being valledskdfh");
+//        AR.logger.debug("u  i am being valledskdfh"+JSON.stringify(poiData));
 		// destroys all existing AR-Objects (markers & radar)
 		AR.context.destroyAll();
 
@@ -73,7 +73,7 @@ var World = {
 		PoiRadar.show();
 		$('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
-        AR.logger.debug("starting JS architect world");
+//        AR.logger.debug("starting JS architect world");
 		// empty list of visible markers
 		World.markerList = [];
 
@@ -81,21 +81,23 @@ var World = {
 		World.markerDrawable_idle = new AR.ImageResource("assets/marker_idle.png");
 		World.markerDrawable_selected = new AR.ImageResource("assets/marker_selected.png");
 		World.markerDrawable_directionIndicator = new AR.ImageResource("assets/indi.png");
-
+        var length = poiData.length;
+        AR.logger.debug("length: "+length);
 		// loop through POI-information and create an AR.GeoObject (=Marker) per POI
-		for (var currentPlaceNr = 0; currentPlaceNr < 1; currentPlaceNr++) {
+		for (var currentPlaceNr = 0; currentPlaceNr < length; currentPlaceNr++) {
 			var singlePoi = {
 				"id": poiData[currentPlaceNr].id,
 				"latitude": parseFloat(poiData[currentPlaceNr].latitude),
 				"longitude": parseFloat(poiData[currentPlaceNr].longitude),
-				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
-				"title": poiData[currentPlaceNr].name,
+//				"altitude": parseFloat(poiData[currentPlaceNr].altitude),
+                "altitude": parseFloat("-32768.0"),
+				"title": poiData[currentPlaceNr].title,
 				"description": poiData[currentPlaceNr].description
 			};
-            
+            AR.logger.debug("single poi "+JSON.stringify(singlePoi));
             var abc = new Marker(singlePoi);
 			World.markerList.push(abc);
-            World.onMarkerSelected(abc);
+//            World.onMarkerSelected(abc);
 		}
         
 //        // add a last POI Custom
@@ -112,7 +114,7 @@ var World = {
 
 		// updates distance information of all placemarks
 		World.updateDistanceToUserValues();
-
+        AR.logger.debug("p;aces loaded");
 		World.updateStatusMessage(currentPlaceNr + ' places loaded');
 
 		// set distance slider to 100%
@@ -164,7 +166,7 @@ var World = {
 	// location updates, fired every time you call architectView.setLocation() in native environment
 	locationChanged: function locationChangedFn(lat, lon, alt, acc) {
         
-        AR.logger.debug("onLocatoinChange");
+//        AR.logger.debug("onLocatoinChange");
         PoiRadar.show();
         $('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
@@ -208,9 +210,9 @@ var World = {
         // deselect previous marker
         if (World.currentMarker) {
 //            alert ("3");
-            AR.logger.debug (World.currentMarker.poiData.id + " " +marker.poiData.id + " :"+World.currentMarker.deselect);
+//            AR.logger.debug (World.currentMarker.poiData.id + " " +marker.poiData.id + " :"+World.currentMarker.deselect);
             if (World.currentMarker.poiData.id == marker.poiData.id) {
-                var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(World.currentMarker.poiData.id) + "&title=" + encodeURIComponent(World.currentMarker.poiData.title) + "&description=" + encodeURIComponent(World.currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue);
+                var architectSdkUrl = "architectsdk://markerselected?id=" + encodeURIComponent(World.currentMarker.poiData.id) + "&title=" + encodeURIComponent(World.currentMarker.poiData.title) + "&description=" + encodeURIComponent(World.currentMarker.poiData.description) + "%distance=" + encodeURIComponent(distanceToUserValue)+"&uuid="+encodeURIComponent(World.currentMarker.poiData.uuid);
                 document.location = architectSdkUrl;
 //                alert ("4");
                 $(".ui-panel-dismiss").unbind("mousedown");
@@ -219,7 +221,7 @@ var World = {
             var architectSdkUrl = "architectsdk://markerselected?Close";
             document.location = architectSdkUrl;
 //            alert ("5");
-            AR.logger.info("deselect1");
+//            AR.logger.info("deselect1");
 //            World.currentMarker.setDeselected(World.currentMarker);
         }
         
@@ -238,7 +240,7 @@ var World = {
 		$(".ui-panel-dismiss").unbind("mousedown");
 //        alert ("9");
 		$("#panel-poidetail").on("panelbeforeclose", function(event, ui) {
-            AR.logger.info("deselect");
+//            AR.logger.info("deselect");
                                  var architectSdkUrl = "architectsdk://markerselected?Close";
                                  document.location = architectSdkUrl;
 			World.currentMarker.setDeselected(World.currentMarker);
@@ -259,7 +261,7 @@ var World = {
          ! This will cause an HTTP error if you didn't register a urlListener in native architectView !
          */
         document.location = architectSdkUrl;
-        AR.logger.info("deselect2");
+//        AR.logger.info("deselect2");
         World.currentMarker.setDeselected(World.currentMarker);
 	},
 
@@ -376,34 +378,38 @@ var World = {
 	// request POI data
 	requestDataFromServer: function requestDataFromServerFn(lat, lon) {
 
+        var architectSdkUrl = "architectsdk://loadPois?";
+        document.location = architectSdkUrl;
+        
+        
 		// set helper var to avoid requesting places while loading
 		World.isRequestingData = true;
 		World.updateStatusMessage('Requesting places from web-service');
 
-		// server-url to JSON content provider
-		var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
-        var jqxhr = $.getJSON(serverUrl, function(data) {
-                AR.logger.info("data complete:"+data);
-                AR.logger.info("data 0:"+data[0].id);
-                
-                              if (data){
-                                World.loadPoisFromJsonData(data);
-                              } else {
-                                AR.logger.info("data empty");
-                              }
-			})
-			.error(function(err) {
-				/*
-					In certain circumstances your web service may not be available or other connection issues can occur. 
-					To notify the user about connection problems a status message is updated.
-					In your own implementation you may e.g. use an info popup or similar.
-				*/
-				World.updateStatusMessage("Invalid web-service response.", true);
-				World.isRequestingData = false;
-			})
-			.complete(function() {
-				World.isRequestingData = false;
-			});
+//		// server-url to JSON content provider
+//		var serverUrl = ServerInformation.POIDATA_SERVER + "?" + ServerInformation.POIDATA_SERVER_ARG_LAT + "=" + lat + "&" + ServerInformation.POIDATA_SERVER_ARG_LON + "=" + lon + "&" + ServerInformation.POIDATA_SERVER_ARG_NR_POIS + "=20";
+//        var jqxhr = $.getJSON(serverUrl, function(data) {
+////                AR.logger.info("data complete:"+data);
+////                AR.logger.info("data 0:"+data[0].id);
+//                
+//                              if (data){
+//                                World.loadPoisFromJsonData(data);
+//                              } else {
+////                                AR.logger.info("data empty");
+//                              }
+//			})
+//			.error(function(err) {
+//				/*
+//					In certain circumstances your web service may not be available or other connection issues can occur. 
+//					To notify the user about connection problems a status message is updated.
+//					In your own implementation you may e.g. use an info popup or similar.
+//				*/
+//				World.updateStatusMessage("Invalid web-service response.", true);
+//				World.isRequestingData = false;
+//			})
+//			.complete(function() {
+//				World.isRequestingData = false;
+//			});
 	},
 
 	// helper to sort places by distance
@@ -444,6 +450,17 @@ function customFunc ( markerLbl, markerDesc ) {
 }
 
 function Func(data1){
+    AR.logger.debug("FUNC FUnction");
 //    alert(data1);
-    World.createPoiFromJsonData(data1);
+//    AR.logger.info("hello"+JSON.stringify(data1));
+//    World.createPoiFromJsonData(data1);
+    World.loadPoisFromJsonData(data1);
 }
+
+//function Func1(data1){
+//    AR.logger.debug("FUNC FUnction");
+//    //    alert(data1);
+//    //    AR.logger.info("hello"+JSON.stringify(data1));
+//        World.createPoiFromJsonData(data1);
+////    World.loadPoisFromJsonData(data1);
+//}

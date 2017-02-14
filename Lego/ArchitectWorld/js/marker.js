@@ -37,7 +37,7 @@ function Marker(poiData) {
     // create an AR.Label for the marker's title 
     this.titleLabel = new AR.Label(poiData.title.trunc(10), 1, {
         zOrder: 1,
-        offsetY: 1.95,
+        offsetY: 1.45,
         style: {
             textColor: '#000000',
             fontStyle: AR.CONST.FONT_STYLE.BOLD

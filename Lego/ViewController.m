@@ -19,10 +19,10 @@
 @interface ViewController () <WTArchitectViewDelegate, WTArchitectViewDebugDelegate>
 
 /* Add a strong property to the main Wikitude SDK component, the WTArchitectView */
-@property (nonatomic, strong) WTArchitectView               *architectView;
+@property (nonatomic, strong) WTArchitectView *architectView;
 
 /* And keep a weak property to the navigation object which represents the loading status of your Architect World */
-@property (nonatomic, weak) WTNavigation                    *architectWorldNavigation;
+@property (nonatomic, weak) WTNavigation *architectWorldNavigation;
 
 @end
 
@@ -31,6 +31,8 @@
  FIRDatabaseReference *ref;
  FIRStorageReference *storageRef;
  NSNumber *altitude;
+ NSMutableDictionary *data;
+NSString *ID;
 
 - (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
@@ -50,7 +52,7 @@
     NSString *bb = [abc hi];
     NSLog(@"%@", bb);
     [ref observeEventType:FIRDataEventTypeValue andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot * _Nonnull snapshot, NSString * _Nullable prevKey) {
-        NSDictionary *data = snapshot.value;
+        data = snapshot.value;
         NSLog(@"%@", data);
     }];
     
@@ -318,6 +320,10 @@
                         NSLog(@"hello");
                         _mainLbl.text = title;
                     }
+                    if ([variableKey isEqual:@"id"]){
+                        ID = value;
+                        NSLog(@"ID Equals: %@", ID);
+                    }
                 }
             }
 
@@ -347,6 +353,38 @@
             [self.view addSubview:_addMarker];
         }
     }
+    
+    if ([[url absoluteString] hasPrefix:@"architectsdk://loadPois?"]) {
+        NSLog(@"Hello Kutty ky bachy");
+        NSString *jsonString1;
+        NSError *error1;
+        NSData *jsonData1 = [NSJSONSerialization dataWithJSONObject:data
+                                                            options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                              error:&error1];
+        NSArray *keyArray = [data allKeys];
+        NSMutableArray *size = [[NSMutableArray alloc]init];
+        NSUInteger count = [data count];
+        for (int i =0; i < count; i++) {
+            [size addObject:[data valueForKey:keyArray[i]]];
+            //        [size  [data valueForKey:keyArray[i]]];
+            NSLog(@"key %@",keyArray[i]);
+            NSLog(@"value %@", size[i]);
+        }
+        if (! jsonData1) {
+            NSLog(@"Got an error: %@", ferror);
+        } else {
+            jsonString1 = [[NSString alloc] initWithData:jsonData1 encoding:NSUTF8StringEncoding];
+            NSLog(@"%@",jsonString1);
+        }
+        
+        id result = [NSJSONSerialization dataWithJSONObject:size
+                                                    options:kNilOptions error:&error1];
+        NSString *jsonString2 = [[NSString alloc] initWithData:result
+                                                      encoding:NSUTF8StringEncoding];
+        // Base64 encode the string to avoid problems
+        //    NSString *encodedString = [Base64 encode:jsonString2];
+        [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString2]];
+    }
     }
 
 - (void) picImage: (id)sender {
@@ -373,7 +411,7 @@
     // For vid upload
     if (videoURL){
         NSLog(@"%@", videoURL);
-        NSString *vidName = [NSString stringWithFormat:@"%@.mov", [[NSUUID UUID] UUIDString]];
+        NSString *vidName = [NSString stringWithFormat:@"%@.mov", ID];
         NSData * vidData = [[NSData alloc] initWithContentsOfURL: videoURL];
         // commented for debugging uncomment when sending to client for pic or video upload
         [[storageRef child:vidName] putData:vidData metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
@@ -389,7 +427,7 @@
 //    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://www.revive-adserver.com/media/GitHub.jpg"]];
     
     NSData *image = UIImagePNGRepresentation(chosenImage);
-    NSString *imageName = [NSString stringWithFormat:@"%@.png", [[NSUUID UUID] UUIDString]];
+    NSString *imageName = [NSString stringWithFormat:@"%@.png", ID];
     NSLog(@"%@",imageName);
     // commented for debugging uncomment when sending to client for pic or video upload
     [[storageRef child:imageName] putData:image metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
@@ -433,14 +471,18 @@
     double lng = [longitude doubleValue];
     NSNumber *lngi = [[NSNumber alloc] initWithDouble:lng];
     
+    NSMutableString *Item = [[NSUUID UUID] UUIDString];
+    NSLog(@"%@", Item);
+    
     NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
-    [json setObject:@12 forKey:@"id"];
+    [json setObject:Item forKey:@"id"];
     [json setObject:lati forKey:@"latitude"];
     [json setObject:lngi forKey:@"longitude"];
     [json setObject:@12 forKey:@"altitude"];
     [json setObject:markerLblTxt forKey:@"title"];
     [json setObject:markerDescTxt forKey:@"description"];
     [json setObject:@"link123" forKey:@"link"];
+//    [json setObject:Item forKey:@"ref"];
     
     NSString *jsonString;
     NSError *error;
@@ -475,12 +517,40 @@
     NSLog(@"%@", [NSString stringWithFormat:@"Func( '%@' )", jsonString]);
 //    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
     
-    NSString *Item = [ref child: [[NSUUID UUID] UUIDString]];
-    NSLog(@"%@", Item);
+    
 //    [ref updateChildValues:json];
 //    [ref setValue:json];
-    [[ref child:markerLblTxt] setValue:json];
-    [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString]];
+    
+    [[ref child:Item] setValue:json];
+    NSLog(@"%@", data);
+    NSString *jsonString1;
+    NSError *error1;
+    NSData *jsonData1 = [NSJSONSerialization dataWithJSONObject:data
+                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                         error:&error];
+    NSArray *keyArray = [data allKeys];
+    NSMutableArray *size = [[NSMutableArray alloc]init];
+    NSUInteger count = [data count];
+    for (int i =0; i < count; i++) {
+        [size addObject:[data valueForKey:keyArray[i]]];
+//        [size  [data valueForKey:keyArray[i]]];
+        NSLog(@"key %@",keyArray[i]);
+        NSLog(@"value %@", size[i]);
+    }
+    if (! jsonData1) {
+        NSLog(@"Got an error: %@", error);
+    } else {
+        jsonString1 = [[NSString alloc] initWithData:jsonData1 encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",jsonString1);
+    }
+    
+    id result = [NSJSONSerialization dataWithJSONObject:size
+                                                options:kNilOptions error:&error];
+    NSString *jsonString2 = [[NSString alloc] initWithData:result
+                                                 encoding:NSUTF8StringEncoding];
+    // Base64 encode the string to avoid problems
+//    NSString *encodedString = [Base64 encode:jsonString2];
+    [self.architectView callJavaScript:[NSString stringWithFormat:@"Func1( %@ )", jsonString2]];
 }
 
 -(CLLocationCoordinate2D) getLocation{
@@ -491,6 +561,7 @@
     [locationManager startUpdatingLocation];
     CLLocation *location = [locationManager location];
     altitude = [NSNumber numberWithDouble:location.altitude];
+//    altitude1 = [NSNumber numberWithDouble: -32768.0];
     CLLocationCoordinate2D coordinate = [location coordinate];
     
     return coordinate;
