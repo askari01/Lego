@@ -418,6 +418,8 @@ NSString *ID;
                     if(error != nil){
                         NSLog(@"%@", error);
                     }else{
+                        NSString *link = [[metadata downloadURL] absoluteString];
+                        [[ref child:ID] updateChildValues:@{@"link": link}];
                         NSLog(@"bothing here: %@", metadata);
                     }
                 }];
@@ -434,6 +436,8 @@ NSString *ID;
         if(error != nil){
             NSLog(@"%@", error);
         }else{
+            NSString *link = [[metadata downloadURL] absoluteString];
+            [[ref child:ID] updateChildValues:@{@"link": link}];
             NSLog(@"bothing here: %@", metadata);
         }
     }];
@@ -554,7 +558,7 @@ NSString *ID;
 }
 
 -(CLLocationCoordinate2D) getLocation{
-    CLLocationManager *locationManager = [[CLLocationManager alloc] init] ;
+    CLLocationManager *locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
