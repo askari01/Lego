@@ -13,6 +13,7 @@
 #import <Lego-Swift.h>
 #import <Firebase.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <MapKit/MapKit.h>
 
 @interface ViewController : UIViewController <WTArchitectViewDelegate>
 @property (nonatomic,strong) JSContext *context;
@@ -22,18 +23,24 @@
     @property (weak, nonatomic) IBOutlet UIImageView *picView;
     @property (weak, nonatomic) IBOutlet UITextField *markerLbl;
     @property (weak, nonatomic) IBOutlet UITextView *markerDesc;
+    @property (weak, nonatomic) IBOutlet UILabel *loadMap;
+    @property (weak, nonatomic) IBOutlet MKMapView *map;
 
 //
 //@property (nonatomic, strong) WTArchitectView               *architectView;
 //@property (nonatomic, weak) WTNavigation                    *architectWorldNavigation;
 
-- (void)architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
+- (void) architectView:(WTArchitectView *)architectView invokedURL:(NSURL *)url;
 
-- (void) picImage: (id)sender ;
+- (void) picImage: (id)sender;
+
+- (void) loadMapWithMarker: (id)sender;
+
 - (CLLocationCoordinate2D) getLocation;
 
 //- (void) hi:;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *mapView;
 @property (weak, nonatomic) IBOutlet UICollectionView *myTempView;
 @property (weak, nonatomic) IBOutlet UICollectionView *addMarker;
 //@property (readonly, nonatomic) FIRStorage *_Nonnull storage;

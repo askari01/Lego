@@ -22,6 +22,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1Wp-vo-2VJ" userLabel="Map View">
+                                <rect key="frame" x="16" y="28" width="288" height="320"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qJK-xe-y56">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <view key="backgroundView" contentMode="scaleToFill" id="Wkt-LT-LsO">
+                                    <rect key="frame" x="0.0" y="0.0" width="288" height="320"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wPw-2L-xAt">
+                                            <rect key="frame" x="-6" y="-7" width="294" height="327"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        </mapView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <cells/>
+                            </collectionView>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0fH-lg-nNA">
                                 <rect key="frame" x="0.0" y="458" width="320" height="110"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,10 +148,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addMarker" destination="cTc-Z0-apj" id="lE7-Tj-wzS"/>
+                        <outlet property="addMarker" destination="cTc-Z0-apj" id="RxE-Rg-T9B"/>
                         <outlet property="cordinatesLbl" destination="7xD-CO-0Vq" id="8KY-Kz-p6c"/>
                         <outlet property="descriptionLbl" destination="64R-VS-J4c" id="4yz-0h-QJH"/>
+                        <outlet property="loadMap" destination="79n-W2-rID" id="UiL-CD-dhb"/>
                         <outlet property="mainLbl" destination="79n-W2-rID" id="fjq-o1-29K"/>
+                        <outlet property="map" destination="wPw-2L-xAt" id="sxf-Jg-P1S"/>
+                        <outlet property="mapView" destination="1Wp-vo-2VJ" id="qOE-Bk-may"/>
                         <outlet property="markerDesc" destination="Hte-CW-EeQ" id="lgf-54-VlF"/>
                         <outlet property="markerLbl" destination="omw-gn-7hR" id="q7P-Ab-FeM"/>
                         <outlet property="myTempView" destination="0fH-lg-nNA" id="PTT-DX-Py3"/>
@@ -137,7 +163,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-66" y="-113"/>
+            <point key="canvasLocation" x="-67.5" y="-113.02816901408451"/>
         </scene>
     </scenes>
     <resources>

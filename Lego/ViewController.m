@@ -32,7 +32,8 @@
  FIRStorageReference *storageRef;
  NSNumber *altitude;
  NSMutableDictionary *data;
-NSString *ID;
+ NSString *ID;
+ NSString *jsonString2;
 
 - (void)dealloc {
     /* Remove this view controller from the default Notification Center so that it can be released properly */
@@ -103,12 +104,19 @@ NSString *ID;
  
         self.myTempView.hidden = true;
         self.addMarker.hidden = true;
+        self.mapView.hidden = true;
         
         _picView.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picImage:)];
         tapGesture.numberOfTapsRequired = 1;
         [tapGesture setDelegate:self];
         [_picView addGestureRecognizer:tapGesture];
+        
+        _loadMap.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(loadMapWithMarker:)];
+        tapGesture1.numberOfTapsRequired = 1;
+        [tapGesture1 setDelegate:self];
+        [_loadMap addGestureRecognizer:tapGesture1];
         
         self.architectView.translatesAutoresizingMaskIntoConstraints = NO;
         
@@ -273,6 +281,9 @@ NSString *ID;
             if (!self.addMarker.hidden){
                 self.addMarker.hidden = true;
             }
+            if (!self.mapView.hidden){
+                self.mapView.hidden = true;
+            }
         }
     
         if (!self.myTempView.hidden){
@@ -397,6 +408,44 @@ NSString *ID;
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentViewController:picker animated:YES completion:NULL];
+}
+
+- (void) loadMapWithMarker: (id)sender {
+    NSLog(@"i am being called how are you ?");
+    self.mapView.hidden = false;
+    [self.view addSubview:_mapView];
+    CLLocationCoordinate2D coordinate = [self getLocation];
+    CLLocationDistance range = 1000;
+
+//    NSError *error = nil;
+    NSArray *keyArray = [data allKeys];
+//    NSMutableArray *size = [[NSMutableArray alloc]init];
+//    NSUInteger count = [data count];
+//    for (int i =0; i < count; i++) {
+//        [size addObject:[data valueForKey:keyArray[i]]];
+//        //        [size  [data valueForKey:keyArray[i]]];
+//        NSLog(@"key %@",keyArray[i]);
+//        NSLog(@"value %@", size[i]);
+//    }
+    
+    MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+    for(int i=0; i<keyArray.count; i++) {
+//        NSLog(@"%@", obj.title);
+        NSDictionary *obj = [data objectForKey:keyArray[i]];
+     
+        NSLog(@"%@", obj);
+        CLLocationCoordinate2D location ;
+        NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] intValue]); // using modern Objective-C syntax
+        NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] intValue]); // using modern Objective-C syntax
+        location.latitude = (CLLocationDegrees)[lat doubleValue]; //        [annot title: [obj valueForKey:@"title"]];
+        location.longitude = (CLLocationDegrees)[lng doubleValue];
+//        NSLog(dictObj);
+        [annot setCoordinate:location];
+    }
+    NSLog(@"DONE");
+    
+    [self.map addAnnotation:annot];
+    [self.map setRegion: MKCoordinateRegionMakeWithDistance(coordinate, range * 2.0, range * 2.0) animated:true];
 }
 
 #pragma mark - Image Picker Controller delegate methods
@@ -550,7 +599,7 @@ NSString *ID;
     
     id result = [NSJSONSerialization dataWithJSONObject:size
                                                 options:kNilOptions error:&error];
-    NSString *jsonString2 = [[NSString alloc] initWithData:result
+    jsonString2 = [[NSString alloc] initWithData:result
                                                  encoding:NSUTF8StringEncoding];
     // Base64 encode the string to avoid problems
 //    NSString *encodedString = [Base64 encode:jsonString2];
