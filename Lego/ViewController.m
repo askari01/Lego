@@ -406,7 +406,7 @@
     picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 //    picker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
+    picker.mediaTypes = @[(NSString*)kUTTypeMovie, (NSString*)kUTTypeAVIMovie, (NSString*)kUTTypeVideo, (NSString*)kUTTypeMPEG4];
     [self presentViewController:picker animated:YES completion:NULL];
 }
 
@@ -428,23 +428,25 @@
 //        NSLog(@"value %@", size[i]);
 //    }
     
-    MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+    
     for(int i=0; i<keyArray.count; i++) {
 //        NSLog(@"%@", obj.title);
+        MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
         NSDictionary *obj = [data objectForKey:keyArray[i]];
      
         NSLog(@"%@", obj);
         CLLocationCoordinate2D location ;
-        NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] intValue]); // using modern Objective-C syntax
-        NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] intValue]); // using modern Objective-C syntax
+        NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] doubleValue]); // using modern Objective-C syntax
+        NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] doubleValue]); // using modern Objective-C syntax
         location.latitude = (CLLocationDegrees)[lat doubleValue]; //        [annot title: [obj valueForKey:@"title"]];
         location.longitude = (CLLocationDegrees)[lng doubleValue];
-//        NSLog(dictObj);
+        NSLog(@"%.8f",location.latitude);
         [annot setCoordinate:location];
+        [self.map addAnnotation:annot];
     }
     NSLog(@"DONE");
     
-    [self.map addAnnotation:annot];
+    
     [self.map setRegion: MKCoordinateRegionMakeWithDistance(coordinate, range * 2.0, range * 2.0) animated:true];
 }
 
