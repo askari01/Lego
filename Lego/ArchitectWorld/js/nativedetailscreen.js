@@ -9,7 +9,7 @@ var ServerInformation = {
 
 // implementation of AR-Experience (aka "World")
 var World = {
-//    PoiRadar.show();
+//    A.a();
 	//  user's latest known location, accessible via userLocation.latitude, userLocation.longitude, userLocation.altitude
 	userLocation: null,
 
@@ -37,6 +37,7 @@ var World = {
     createPoiFromJsonData: function createPoiFromJsonDataFn(poiData){
 //        AR.context.destroyAll();
         PoiRadar.show();
+        
         $('#radarContainer').unbind('click');
         $("#radarContainer").click(PoiRadar.clickedRadar);
         PoiRadar.updatePosition();
@@ -114,7 +115,7 @@ var World = {
 
 		// updates distance information of all placemarks
 		World.updateDistanceToUserValues();
-        AR.logger.debug("p;aces loaded");
+        AR.logger.debug("places loaded");
 		World.updateStatusMessage(currentPlaceNr + ' places loaded');
 
 		// set distance slider to 100%

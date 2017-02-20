@@ -276,6 +276,35 @@
         
  
         NSLog(@"CALLING '%@'", url);
+    if ([[url absoluteString] hasPrefix:@"architectsdk://test"]) {
+        NSLog(@"TEST CALLING");
+        self.mapView.hidden = false;
+        [self.view addSubview:_mapView];
+        CLLocationCoordinate2D coordinate = [self getLocation];
+        CLLocationDistance range = 1000;
+        
+        NSArray *keyArray = [data allKeys];
+        
+        for(int i=0; i<keyArray.count; i++) {
+            //        NSLog(@"%@", obj.title);
+            MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+            NSDictionary *obj = [data objectForKey:keyArray[i]];
+            
+            NSLog(@"%@", obj);
+            CLLocationCoordinate2D location ;
+            NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] doubleValue]); // using modern Objective-C syntax
+            NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] doubleValue]); // using modern Objective-C syntax
+            location.latitude = (CLLocationDegrees)[lat doubleValue]; //        [annot title: [obj valueForKey:@"title"]];
+            location.longitude = (CLLocationDegrees)[lng doubleValue];
+            NSLog(@"%.8f",location.latitude);
+            [annot setCoordinate:location];
+            [self.map addAnnotation:annot];
+        }
+        NSLog(@"DONE");
+        
+        
+        [self.map setRegion: MKCoordinateRegionMakeWithDistance(coordinate, range * 2.0, range * 2.0) animated:true];
+    }
     
         if ([[url absoluteString] hasPrefix:@"architectsdk://markerselected?Close"]) {
             if (!self.addMarker.hidden){
