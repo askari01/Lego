@@ -12,7 +12,7 @@
 /* Wikitude SDK debugging */
 
 
-/*Wikitude SDK license key (EDU Purpose only) */
+/*Wikitude SDK license key (EDU Purpose only) USE com.askari.AR as identifier */
 #define kWT_LICENSE_KEY @"fZIgzrYWvaBSnaCuujQB6vcRpQESBV0aYvMaDo81Pkdh7SQAsEjB8WlEn1aZLV4izpTuEDnpspthKwFLPd2BU/H/q/Ig1eOCcaPhVftlmkgl7sQkUsvh/YJfmmQI+w8df/S3+LttkNMsw8OhW23nhjmay9gg8EgyJ1UmtksFn1hTYWx0ZWRfX5sExigS3PZKCgTLSeIQFvSoEETXB7vmzHWPBC/01hASFcnkMxL3HqfV2unlVrPuuAVn2Ys2C4SyOGjKZdMy35ViUEfpHEnXT2AZx3Tn+sbBA660RwwCuPOlw9OPI0VswRBgOuIA7Yp5OEfllLIcYFuUyFuoPMRIPhPPthSZjafy1N5KknNEFnu/3WqOE4cHCRZbgpV812ZWOp4CKQ0IxgT7Hlp7TP5GRId1gIkToNw28ahULOqm/D6xKodkbYZC2aqdlibmGRq3dHO+MxXS+ErBjbujOWXJFh3mJvWB0Ty1XQAPL+GYrV3829jm847epi9Dg9mxznOM04sLTLtGL0z1bGKH0XuH5LLWHURYCpT1erRll5PGglNZmBTSuJbt97PIMu61F9s3H+lGS0IDLjy8rRMlhfSel8W6pV5dCAA3BkkJzrM4Fb4X1xPxRGFMoGGSALAdwmXSqANH++KGXwjvRPuh7/E0z/JgC/zCBS1sw08wkEVYUbR5DF9YG6GY1+qjW/MyykQ4"
 
 
@@ -28,8 +28,8 @@
 
 @implementation ViewController
 
- FIRDatabaseReference *ref;
- FIRStorageReference *storageRef;
+ FIRDatabaseReference *ref; // Firebase DB reference
+ FIRStorageReference *storageRef; // Firebase Storage Ref for BLOB
  NSNumber *altitude;
  NSMutableDictionary *data;
  NSString *ID;
@@ -42,35 +42,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //
-    ref = [[FIRDatabase database] referenceWithPath: @"marker"];
-    storageRef = [[FIRStorage storage] referenceWithPath:@"marker_images"];
+   
+    // FireBase
+    ref = [[FIRDatabase database] referenceWithPath: @"marker"]; // Marker Header at FireBase
+    storageRef = [[FIRStorage storage] referenceWithPath:@"marker_images"]; // Marker BLOB storage at FireBase
     [storageRef child:@"hello"];
     //
     
-    
-    Hello1 *abc = [Hello1 new];
-    NSString *bb = [abc hi];
-    NSLog(@"%@", bb);
     [ref observeEventType:FIRDataEventTypeValue andPreviousSiblingKeyWithBlock:^(FIRDataSnapshot * _Nonnull snapshot, NSString * _Nullable prevKey) {
         data = snapshot.value;
-        NSLog(@"%@", data);
+//        NSLog(@"%@", data);
     }];
-    
-//    NSLog(@"inside xxxxxx");
-//    self.label.text = @"dsdfsdfssdfsdf";    // Do any additional setup after loading the view, typically from a nib.
-    
-    /* It might be the case that the device which is running the application does not fulfil all Wikitude SDK hardware requirements.
-     To check for this and handle the situation properly, use the -isDeviceSupportedForRequiredFeatures:error class method.
-     
-     Required features specify in more detail what your Architect World intends to do. Depending on your intentions, more or less devices might be supported.
-     e.g. an iPod Touch is missing some hardware components so that Geo augmented reality does not work, but 2D tracking does.
-     
-     NOTE: On iOS, an unsupported device might be an iPhone 3GS for image recognition or an iPod Touch 4th generation for Geo augmented reality.
-     */
+
     NSError *deviceSupportError = nil;
     if ( [WTArchitectView isDeviceSupportedForRequiredFeatures:WTFeature_Geo error:&deviceSupportError] ) {
-//        NSLog(@"inside rrrrr");
         /* Standard WTArchitectView object creation and initial configuration */
         self.architectView = [[WTArchitectView alloc] initWithFrame:CGRectZero motionManager:nil];
         self.architectView.delegate = self;
@@ -78,10 +63,6 @@
         
         /* Use the -setLicenseKey method to unlock all Wikitude SDK features that you bought with your license. */
         [self.architectView setLicenseKey:@"fZIgzrYWvaBSnaCuujQB6vcRpQESBV0aYvMaDo81Pkdh7SQAsEjB8WlEn1aZLV4izpTuEDnpspthKwFLPd2BU/H/q/Ig1eOCcaPhVftlmkgl7sQkUsvh/YJfmmQI+w8df/S3+LttkNMsw8OhW23nhjmay9gg8EgyJ1UmtksFn1hTYWx0ZWRfX5sExigS3PZKCgTLSeIQFvSoEETXB7vmzHWPBC/01hASFcnkMxL3HqfV2unlVrPuuAVn2Ys2C4SyOGjKZdMy35ViUEfpHEnXT2AZx3Tn+sbBA660RwwCuPOlw9OPI0VswRBgOuIA7Yp5OEfllLIcYFuUyFuoPMRIPhPPthSZjafy1N5KknNEFnu/3WqOE4cHCRZbgpV812ZWOp4CKQ0IxgT7Hlp7TP5GRId1gIkToNw28ahULOqm/D6xKodkbYZC2aqdlibmGRq3dHO+MxXS+ErBjbujOWXJFh3mJvWB0Ty1XQAPL+GYrV3829jm847epi9Dg9mxznOM04sLTLtGL0z1bGKH0XuH5LLWHURYCpT1erRll5PGglNZmBTSuJbt97PIMu61F9s3H+lGS0IDLjy8rRMlhfSel8W6pV5dCAA3BkkJzrM4Fb4X1xPxRGFMoGGSALAdwmXSqANH++KGXwjvRPuh7/E0z/JgC/zCBS1sw08wkEVYUbR5DF9YG6GY1+qjW/MyykQ4"];
-        
-//        NSString *javaScriptCall = [NSString stringWithFormat:@"customFunc()"];
-//        [self.architectView callJavaScript:javaScriptCall];
-
         
         /* The Architect World can be loaded independently from the WTArchitectView rendering.
          
@@ -99,9 +80,6 @@
         
         /* Standard subview handling using Autolayout */
         [self.view addSubview:self.architectView];
-        
-//        _myTempView.frame = CGRectMake(0, 590, [[UIScreen mainScreen] bounds].size.width, 360);
- 
         self.myTempView.hidden = true;
         self.addMarker.hidden = true;
         self.mapView.hidden = true;
@@ -124,9 +102,6 @@
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"|[_architectView]|" options:0 metrics:nil views:views] ];
         [self.view addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_architectView]|" options:0 metrics:nil views:views] ];
         
-//        NSLog(@"inside");
-        
-        //Testing JS call
     }
     else {
         NSLog(@"This device is not supported. Show either an alert or use this class method even before presenting the view controller that manages the WTArchitectView. Error: %@", [deviceSupportError localizedDescription]);
@@ -275,9 +250,7 @@
 //        [self.architectView callJavaScript:[NSString stringWithFormat:@"alert('%d, %d, %d, %d')", 1, 2, 3, 4]];
         
  
-        NSLog(@"CALLING '%@'", url);
     if ([[url absoluteString] hasPrefix:@"architectsdk://test"]) {
-        NSLog(@"TEST CALLING");
         self.mapView.hidden = false;
         [self.view addSubview:_mapView];
         CLLocationCoordinate2D coordinate = [self getLocation];
@@ -290,18 +263,14 @@
             MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
             NSDictionary *obj = [data objectForKey:keyArray[i]];
             
-            NSLog(@"%@", obj);
             CLLocationCoordinate2D location ;
             NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] doubleValue]); // using modern Objective-C syntax
             NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] doubleValue]); // using modern Objective-C syntax
             location.latitude = (CLLocationDegrees)[lat doubleValue]; //        [annot title: [obj valueForKey:@"title"]];
             location.longitude = (CLLocationDegrees)[lng doubleValue];
-            NSLog(@"%.8f",location.latitude);
             [annot setCoordinate:location];
             [self.map addAnnotation:annot];
         }
-        NSLog(@"DONE");
-        
         
         [self.map setRegion: MKCoordinateRegionMakeWithDistance(coordinate, range * 2.0, range * 2.0) animated:true];
     }
@@ -342,7 +311,7 @@
             NSString *encoded = tag;
             NSString *decoded = [encoded stringByRemovingPercentEncoding];
             
-            NSLog(@"decodedString %@", decoded);
+//            NSLog(@"decodedString %@", decoded);
             
             NSString *url=decoded;
             NSArray *comp1 = [url componentsSeparatedByString:@"?"];
@@ -351,23 +320,18 @@
             for (NSString *element in queryElements) {
                 NSArray *keyVal = [element componentsSeparatedByString:@"="];
                 if (keyVal.count > 0) {
-                    NSLog(@"@%", keyVal);
                     NSString *variableKey = [keyVal objectAtIndex:0];
                     NSString *value = (keyVal.count == 2) ? [keyVal lastObject] : nil;
-                    NSLog(@"%@ %@", variableKey , value);
                     if ([variableKey  isEqual: @"title"]){
                         NSString *title = [value stringByReplacingOccurrencesOfString:@"#" withString:@" "];
-                        NSLog(@"hello");
                         _mainLbl.text = title;
                     }
                     if ([variableKey isEqual:@"id"]){
                         ID = value;
-                        NSLog(@"ID Equals: %@", ID);
                     }
                 }
             }
 
-            NSLog(@"tag is %@", tag);
             if (self.myTempView.hidden){
                 self.myTempView .hidden = false;
                 [UIView animateWithDuration:0.5
@@ -395,7 +359,6 @@
     }
     
     if ([[url absoluteString] hasPrefix:@"architectsdk://loadPois?"]) {
-        NSLog(@"Hello Kutty ky bachy");
         NSString *jsonString1;
         NSError *error1;
         NSData *jsonData1 = [NSJSONSerialization dataWithJSONObject:data
@@ -407,28 +370,23 @@
         for (int i =0; i < count; i++) {
             [size addObject:[data valueForKey:keyArray[i]]];
             //        [size  [data valueForKey:keyArray[i]]];
-            NSLog(@"key %@",keyArray[i]);
-            NSLog(@"value %@", size[i]);
         }
         if (! jsonData1) {
             NSLog(@"Got an error: %@", ferror);
         } else {
             jsonString1 = [[NSString alloc] initWithData:jsonData1 encoding:NSUTF8StringEncoding];
-            NSLog(@"%@",jsonString1);
+//            NSLog(@"%@",jsonString1);
         }
         
         id result = [NSJSONSerialization dataWithJSONObject:size
                                                     options:kNilOptions error:&error1];
         NSString *jsonString2 = [[NSString alloc] initWithData:result
                                                       encoding:NSUTF8StringEncoding];
-        // Base64 encode the string to avoid problems
-        //    NSString *encodedString = [Base64 encode:jsonString2];
         [self.architectView callJavaScript:[NSString stringWithFormat:@"Func( %@ )", jsonString2]];
     }
     }
 
 - (void) picImage: (id)sender {
-    NSLog(@"hello");
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
@@ -440,41 +398,25 @@
 }
 
 - (void) loadMapWithMarker: (id)sender {
-    NSLog(@"i am being called how are you ?");
     self.mapView.hidden = false;
     [self.view addSubview:_mapView];
     CLLocationCoordinate2D coordinate = [self getLocation];
     CLLocationDistance range = 1000;
 
-//    NSError *error = nil;
     NSArray *keyArray = [data allKeys];
-//    NSMutableArray *size = [[NSMutableArray alloc]init];
-//    NSUInteger count = [data count];
-//    for (int i =0; i < count; i++) {
-//        [size addObject:[data valueForKey:keyArray[i]]];
-//        //        [size  [data valueForKey:keyArray[i]]];
-//        NSLog(@"key %@",keyArray[i]);
-//        NSLog(@"value %@", size[i]);
-//    }
-    
-    
+
     for(int i=0; i<keyArray.count; i++) {
-//        NSLog(@"%@", obj.title);
         MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
         NSDictionary *obj = [data objectForKey:keyArray[i]];
      
-        NSLog(@"%@", obj);
         CLLocationCoordinate2D location ;
         NSNumber *lat = @([[obj valueForKeyPath:@"latitude"] doubleValue]); // using modern Objective-C syntax
         NSNumber *lng = @([[obj valueForKeyPath:@"longitude"] doubleValue]); // using modern Objective-C syntax
         location.latitude = (CLLocationDegrees)[lat doubleValue]; //        [annot title: [obj valueForKey:@"title"]];
         location.longitude = (CLLocationDegrees)[lng doubleValue];
-        NSLog(@"%.8f",location.latitude);
         [annot setCoordinate:location];
         [self.map addAnnotation:annot];
     }
-    NSLog(@"DONE");
-    
     
     [self.map setRegion: MKCoordinateRegionMakeWithDistance(coordinate, range * 2.0, range * 2.0) animated:true];
 }
@@ -487,10 +429,8 @@
     _picView.image = chosenImage;
     NSURL *videoURL = [info valueForKey:UIImagePickerControllerMediaURL];
     
-    NSLog(@"%@", videoURL);
     // For vid upload
     if (videoURL){
-        NSLog(@"%@", videoURL);
         NSString *vidName = [NSString stringWithFormat:@"%@.mov", ID];
         NSData * vidData = [[NSData alloc] initWithContentsOfURL: videoURL];
         // commented for debugging uncomment when sending to client for pic or video upload
@@ -505,12 +445,8 @@
                 }];
     }else {
     // For image upload
-//    NSURL * file = [[NSURL alloc]initWithString:@"https://www.revive-adserver.com/media/GitHub.jpg"];
-//    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: @"https://www.revive-adserver.com/media/GitHub.jpg"]];
-    
     NSData *image = UIImagePNGRepresentation(chosenImage);
     NSString *imageName = [NSString stringWithFormat:@"%@.png", ID];
-    NSLog(@"%@",imageName);
     // commented for debugging uncomment when sending to client for pic or video upload
     [[storageRef child:imageName] putData:image metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
         if(error != nil){
@@ -518,7 +454,6 @@
         }else{
             NSString *link = [[metadata downloadURL] absoluteString];
             [[ref child:ID] updateChildValues:@{@"link": link}];
-            NSLog(@"bothing here: %@", metadata);
         }
     }];
     }
@@ -535,17 +470,8 @@
     self.addMarker.hidden = true;
     NSMutableString *markerLblTxt = _markerLbl.text;
     NSMutableString *markerDescTxt = _markerDesc.text;
-    NSLog(@"hello: %@",markerDescTxt);
     [self.addMarker endEditing:YES];
-    
-//    @{
-//      @"id": @21,
-//      @"latitude": @123,
-//      @"longitude": @321,
-//      @"altitude": @55,
-//      @"title": @"title",
-//      @"description": @"dec"
-//      }
+
     CLLocationCoordinate2D coordinate = [self getLocation];
     NSString *latitude = [NSString stringWithFormat:@"%f", coordinate.latitude];
     NSString *longitude = [NSString stringWithFormat:@"%f", coordinate.longitude];
@@ -556,7 +482,7 @@
     NSNumber *lngi = [[NSNumber alloc] initWithDouble:lng];
     
     NSMutableString *Item = [[NSUUID UUID] UUIDString];
-    NSLog(@"%@", Item);
+//    NSLog(@"%@", Item);
     
     NSMutableDictionary *json = [[NSMutableDictionary alloc] init];
     [json setObject:Item forKey:@"id"];
@@ -566,7 +492,6 @@
     [json setObject:markerLblTxt forKey:@"title"];
     [json setObject:markerDescTxt forKey:@"description"];
     [json setObject:@"link123" forKey:@"link"];
-//    [json setObject:Item forKey:@"ref"];
     
     NSString *jsonString;
     NSError *error;
@@ -578,7 +503,7 @@
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",jsonString);
+//        NSLog(@"%@",jsonString);
     }
     
     
@@ -598,15 +523,13 @@
         NSLog(@"'%@'",recoveredString);
     }
 
-    NSLog(@"%@", [NSString stringWithFormat:@"Func( '%@' )", jsonString]);
 //    [self.architectView callJavaScript:[NSString stringWithFormat:@"customFunc( '%@', '%@' )", markerLblTxt, markerDescTxt]];
-    
-    
+
 //    [ref updateChildValues:json];
 //    [ref setValue:json];
     
     [[ref child:Item] setValue:json];
-    NSLog(@"%@", data);
+//    NSLog(@"%@", data);
     NSString *jsonString1;
     NSError *error1;
     NSData *jsonData1 = [NSJSONSerialization dataWithJSONObject:data
@@ -618,22 +541,18 @@
     for (int i =0; i < count; i++) {
         [size addObject:[data valueForKey:keyArray[i]]];
 //        [size  [data valueForKey:keyArray[i]]];
-        NSLog(@"key %@",keyArray[i]);
-        NSLog(@"value %@", size[i]);
     }
     if (! jsonData1) {
         NSLog(@"Got an error: %@", error);
     } else {
         jsonString1 = [[NSString alloc] initWithData:jsonData1 encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",jsonString1);
+//        NSLog(@"%@",jsonString1);
     }
     
     id result = [NSJSONSerialization dataWithJSONObject:size
                                                 options:kNilOptions error:&error];
     jsonString2 = [[NSString alloc] initWithData:result
                                                  encoding:NSUTF8StringEncoding];
-    // Base64 encode the string to avoid problems
-//    NSString *encodedString = [Base64 encode:jsonString2];
     [self.architectView callJavaScript:[NSString stringWithFormat:@"Func1( %@ )", jsonString2]];
 }
 
@@ -645,7 +564,6 @@
     [locationManager startUpdatingLocation];
     CLLocation *location = [locationManager location];
     altitude = [NSNumber numberWithDouble:location.altitude];
-//    altitude1 = [NSNumber numberWithDouble: -32768.0];
     CLLocationCoordinate2D coordinate = [location coordinate];
     
     return coordinate;
